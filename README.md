@@ -25,12 +25,36 @@ I'm Ada Edwards from the Financial Times, I'm here to talk about Progressive Web
 * **Responsive** - Perfectly filling the screen, These sites are primarily aimed at mobile and tablets so will need to respond to the plethera of screen sizes. They should also just work as desktop websites too.
 * **Touch capable** - An interface designed for touch with Gesture interaction
 * **On the open web** - Not locked in to any browser or app store.
+* ** Push Notifications ** - Not applicable for everyone but is very app-like
 
 http://labs.ft.com/2012/06/what-exactly-is-an-app/
 
 ## Are they new?
 
  * Progressive Web Apps are not new. The FT has been doing it since 2012:
- * 
 
+![First Version of the FT Web App](https://raw.githubusercontent.com/AdaRoseEdwards/progressive-web-apps-talk/master/ipad-home.jpg)
+
+ * Since then it has only gotten easier to produce web apps. 
+ * A lot of useful web technologies are well supported.
+
+## Technology
+
+Offlining:
+* Service Workers - No more AppCache
+* Indexed DB'
+.* LocalForage
+.* CouchDB replication
+
+Touch Capabilities:
+ * I like to use Greensock or Hammer.js
+
+Push Notifications:
+* Support in Chrome, Firefox and Samsung Web Browser, Requires Service Worker
+
+## Thanks
+
+Thank you for listening I hope you have a successful app
+
+![FT APP on a Balloon!](https://raw.githubusercontent.com/AdaRoseEdwards/progressive-web-apps-talk/master/FinancialTimes_G-FTUS_Balloon_LordMayorsAppeal.jpg)
 
