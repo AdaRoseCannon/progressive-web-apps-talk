@@ -14,6 +14,13 @@ Qs?
 
 I'm Ada Edwards from the Financial Times, I'm here to talk about Progressive Web Apps.
 
+I'd like to ask a few questions before I start.
+
+* Who here is a primarily a native app developer?
+.* Who here is a native app developer who mostly uses web tech in a wrapper like cordova?
+* Who here is mostly a Web Developer?
+.* Who here has built a progressive webapp before?
+
 ## What is a progressive web app?
 
 * A progressive web app is a type of website which exhibits certain properties.
@@ -60,6 +67,9 @@ Push Notifications:
  * The app is a messaging app it sends emojis and small images.
  * To keep it simple it doesn't use any frame works on the front end.
  * It's just an ordinary web page with some javascript.
+ * I built it mainly focussed on Samsung Web Browser
+ .* Based on Cr44 with some fixes, supports indexedDB, Service Worker, Push Notifications.
+ .* All of the lovely tools to build a web app.
 
 ## The back end - nothing remarkable.
 
@@ -109,6 +119,22 @@ Push Notifications:
  * Touch interactions are mostly handled with just the Web touch events no library there.
  * Draggable Modals and the scrolling messages are handled by the Greensock Draggable and Tweening library. This gave me really smooth animations for that truly native feeling.
  * Important you need to remove the 300ms tap delay you get this for free in Chromium based browsers simply by having a `<meta name="viewport" content="width=device-width">` tag. But for iOS it can be a little tricky but there are libraries to handle it.
+
+## Sending push notifcations
+### Limitations
+### How to set it up,
+**Backend**
+ * Google Developer Console
+ * Google Cloud Messaging
+ * App gives you a url
+ * Sync that url with the server
+ * May get regenerated so will need to be synced
+ * whenever I need to make a push notification I summon this url to use it
+
+**frontend**
+ * Service worker recieves it.
+ * Triggers refresh on the client
+ * SHows notification box
 
 ## Thanks
 
