@@ -1,0 +1,72 @@
+
+
+html {
+	background: #FFF0F5;
+}
+
+html, body {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 400;
+	color: #333;
+	margin: 0;
+	padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: 300;
+}
+
+h2, h3 {
+	margin: 2em 0 1.5em 0;
+	border-bottom: 1px solid grey;
+}
+
+a {
+	color: #336ACE;
+}
+
+h2 a {
+	text-decoration: none;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+	padding: 0 2em;
+}
+
+h1:first-of-type {
+	border-bottom: 1px solid #ccc;
+	background: url(/images/pattern.svg);
+	background-size: cover;
+	margin: 0;
+	padding: 2em 1em 1em 1em;
+}
+
+.title h1 {
+	font-size: 2em;
+	text-decoration: none;
+}
+
+.code {
+	font-family: monospace;
+	display: inline;
+}
+
+pre {
+	display: block;
+	border: 1px solid rgba(100, 100, 100, 0.5);
+	background: 1px solid rgba(100, 100, 100, 0.3);
+	padding: 2em;
+	border-radius: 1em;
+	margin: 1em;
+	overflow: auto;
+	tab-size: 4;
+}
+
+footer {
+	padding: 1em;
+	border-top: 1px solid #ccc;
+}
+
+img {
+	max-width: 80%;
+}

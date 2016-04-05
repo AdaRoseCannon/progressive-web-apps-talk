@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="">
+	{% include head.html %}
+	<link rel="stylesheet" href="{{ site.aslide }}/a-slides.css">
+	<body>
+		<div class="slide-container">
+{{ content }}
+		</div>
+		<footer>
+			{% include footer.html %}
+		</footer>
+
+		<script src="https://cdn.rawgit.com/AdaRoseEdwards/dirty-dom/v1.3.1/build/dirty-dom-lib.min.js"></script>
+		<script src="{{ site.aslide }}/a-slides.js"></script>
+		<script src="{{page.prefix}}scripts/main.js"></script>
+	</body>
+</html>

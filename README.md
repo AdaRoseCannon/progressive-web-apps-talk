@@ -1,3 +1,7 @@
+---
+layout: post
+---
+
 # progressive-web-apps-talk
 Talk plan for SDC
 Length 15-15mins, with demo.
