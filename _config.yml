@@ -3,7 +3,7 @@
 # 2. config.build.yml
 # 3. config.yml
 
-aslide: https://rawgit.com/AdaRoseEdwards/a-slides/v1.0.4/build
+aslide: https://rawgit.com/AdaRoseEdwards/a-slides/master/build
 name: Progressive Web Apps
 description: It's a website you can add to your homescreen...
 author:

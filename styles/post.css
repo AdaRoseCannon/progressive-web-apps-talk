@@ -10,13 +10,14 @@ html, body {
 	color: #333;
 	margin: 0;
 	padding: 0;
+	overflow: auto;
 }
 
 h1, h2, h3, h4, h5, h6 {
 	font-weight: 300;
 }
 
-h2, h3 {
+body.post h2, body.post h3 {
 	margin: 2em 0 1.5em 0;
 	border-bottom: 1px solid grey;
 }
@@ -33,7 +34,7 @@ p, h1, h2, h3, h4, h5, h6 {
 	padding: 0 2em;
 }
 
-h1:first-of-type {
+body.post > h1:first-of-type {
 	border-bottom: 1px solid #ccc;
 	background: url(/images/pattern.svg);
 	background-size: cover;
@@ -41,7 +42,7 @@ h1:first-of-type {
 	padding: 2em 1em 1em 1em;
 }
 
-.title h1 {
+body.post .title h1 {
 	font-size: 2em;
 	text-decoration: none;
 }
@@ -69,4 +70,10 @@ footer {
 
 img {
 	max-width: 80%;
+}
+
+blockquote {
+	background: white;
+    box-shadow: 0 0 2em -0.5em;
+    border: 1px solid grey;
 }

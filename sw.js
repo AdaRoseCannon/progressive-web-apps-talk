@@ -5,12 +5,9 @@
 
 importScripts('scripts/sw-toolbox.js');
 
-var resources = [
-	'styles/main.css',
-	'scripts/main.js',
+const resources = [
 	'https://fonts.googleapis.com/css?family=Open+Sans:300italic,400,300,600,800',
 	'https://s.gravatar.com/avatar/e137ba0321f12ecb5340680815b42c26?s=400',
-	'./'
 ];
 
 // Send a signal to all connected windows.

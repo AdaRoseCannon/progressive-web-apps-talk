@@ -1,8 +1,14 @@
 ---
 layout: post
+title: Progressive Web App V1
+description: First draft of progressive webapp stuff
 ---
 
 # progressive-web-apps-talk
+
+[Convert to Slide Deck](#aslides)
+<script src="scripts/post-to-slides.js"></script>
+
 Talk plan for SDC
 Length 15-15mins, with demo.
 Qs?
@@ -21,9 +27,15 @@ I'm Ada Edwards from the Financial Times, I'm here to talk about Progressive Web
 I'd like to ask a few questions before I start.
 
 * Who here is a primarily a native app developer?
-.* Who here is a native app developer who mostly uses web tech in a wrapper like cordova?
+  * Who here is a native app developer who mostly uses web tech in a wrapper like cordova?
 * Who here is mostly a Web Developer?
-.* Who here has built a progressive webapp before?
+  * Who here has built a progressive webapp before?
+
+>
+># Progressive Web Apps
+>
+>## Ada Rose Edwards - Financial Times
+>
 
 ## What is a progressive web app?
 
@@ -38,17 +50,17 @@ I'd like to ask a few questions before I start.
 * **On the open web** - Not locked in to any browser or app store.
 * **Push Notifications** - Not applicable for everyone but is very app-like
 
-http://labs.ft.com/2012/06/what-exactly-is-an-app/
+> Mind Map Goes here
+> http://labs.ft.com/2012/06/what-exactly-is-an-app/
 
 ## Are they new?
 
  * Progressive Web Apps are not new. The Financial Times has been using if for it's digital content delivery since 2012:
-
-![First Version of the FT Web App](https://raw.githubusercontent.com/AdaRoseEdwards/progressive-web-apps-talk/master/ipad-home.jpg)
-
  * Back then we were breaking a lot of new ground and it was very difficult
  * Since then it has gotten easier to produce web apps. 
  * A lot of useful web technologies which facilitate the production of web apps are now widely supported across many platforms.
+
+>![First Version of the FT Web App](https://raw.githubusercontent.com/AdaRoseEdwards/progressive-web-apps-talk/master/images/ipad-home.jpg)
 
 ## Technology
 
@@ -75,11 +87,16 @@ Push Notifications:
  .* Based on Cr44 with some fixes, supports indexedDB, Service Worker, Push Notifications.
  .* All of the lovely tools to build a web app.
 
+
+> blah
+
 ## The back end - nothing remarkable.
 
  * The user information is backed by Redis on Heroku, ideally I would use CouchDB due to it's database replication tech but it is not available on Heroku.
  * HTTPS and Caching and caching layer provided by Cloudflare
  * Twitter oauth using passport.js
+
+> blah
 
 ## The middle layer - the service worker.
 
@@ -91,7 +108,7 @@ Push Notifications:
  * In the case of my app I use it to display notifications and trigger updates on the front end, without using sockets or long polling.
  * The image that gets displayed can be any image. For my app whenever I recieve a message I get the url of the image using twemoji and dispaly that. If the sender sends a photo it'll display that.
 
-```
+> ```
                 +-------------------------------------------------+
                 |                                                 |
                 |    The Internet               (Cats)            |
@@ -124,6 +141,8 @@ Push Notifications:
  * Draggable Modals and the scrolling messages are handled by the Greensock Draggable and Tweening library. This gave me really smooth animations for that truly native feeling.
  * Important you need to remove the 300ms tap delay you get this for free in Chromium based browsers simply by having a `<meta name="viewport" content="width=device-width">` tag. But for iOS it can be a little tricky but there are libraries to handle it.
 
+> stuff
+
 ## Sending push notifcations
 ### Limitations
 ### How to set it up,
@@ -140,9 +159,10 @@ Push Notifications:
  * Triggers refresh on the client
  * SHows notification box
 
+> blah
+
 ## Thanks
 
 Thank you for listening I hope you have a successful app
 
-![FT APP on a Balloon!](https://raw.githubusercontent.com/AdaRoseEdwards/progressive-web-apps-talk/master/FinancialTimes_G-FTUS_Balloon_LordMayorsAppeal.jpg)
-
+> ![FT APP on a Balloon!](https://raw.githubusercontent.com/AdaRoseEdwards/progressive-web-apps-talk/master/images/FinancialTimes_G-FTUS_Balloon_LordMayorsAppeal.jpg)
