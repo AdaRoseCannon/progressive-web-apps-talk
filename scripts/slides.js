@@ -13,7 +13,7 @@
 
 (function () {
 	const slideData = [];
-	const slideContainer = document.querySelector('.slide-container');
+	const slideContainer = document.querySelector('.a-slides_slide-container');
 
 	new ASlides(slideData, {
 		slideContainer,

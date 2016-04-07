@@ -17,7 +17,7 @@ h1, h2, h3, h4, h5, h6 {
 	font-weight: 300;
 }
 
-body.post h2, body.post h3 {
+body.post > h2, body.post > h3 {
 	margin: 2em 0 1.5em 0;
 	border-bottom: 1px solid grey;
 }
@@ -31,7 +31,7 @@ h2 a {
 }
 
 p, h1, h2, h3, h4, h5, h6 {
-	padding: 0 2em;
+	padding: 0 32px;
 }
 
 body.post > h1:first-of-type {
@@ -72,8 +72,6 @@ img {
 	max-width: 80%;
 }
 
-blockquote {
-	background: white;
-    box-shadow: 0 0 2em -0.5em;
-    border: 1px solid grey;
+body.post blockquote {
+	background-image: none !important;
 }

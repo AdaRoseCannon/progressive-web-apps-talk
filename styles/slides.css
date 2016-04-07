@@ -1,0 +1,32 @@
+
+blockquote.a-slides_slide-content {
+	background-color: white;
+    box-shadow: 0 0 2em -0.5em;
+    border: 1px solid grey;
+    display: flex;
+	flex-wrap: wrap;
+    font-size: 3em;
+    font-weight: 900;
+    font-family: Lato;
+    align-items: stretch;
+    justify-content: flex-start;
+    align-content: flex-start;
+	background-size: cover;
+}
+
+blockquote.a-slides_slide-content.dark {
+	background-color: darkslategray;
+	background-blend-mode: soft-light;
+	color: white;
+}
+
+blockquote.a-slides_slide-content p {
+	display: flex;
+	flex-grow: 1;
+}
+
+blockquote.a-slides_slide-content img,
+blockquote.a-slides_slide-content video {
+	object-fit: contain;
+	flex-grow: 1;
+}

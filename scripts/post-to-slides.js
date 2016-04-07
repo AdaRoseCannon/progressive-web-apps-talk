@@ -41,7 +41,6 @@ function init() {
 
 		addStyle('https://rawgit.com/AdaRoseEdwards/a-slides/master/build/a-slides.css');
 
-
 		const slideContainer = document.createElement('div').setClassName('a-slides_slide-container');
 		let slide;
 		let i=0;
@@ -50,7 +49,7 @@ function init() {
 			const notes = slide.prevAll();
 			const newSlide = document.createElement('div').setClassName('a-slides_slide');
 			const notesWrapper = document.createElement('div').setClassName('a-slides_notes');
-			slide.setClassName('a-slides_slide-content');
+			slide.classList.add('a-slides_slide-content');
 			newSlide.dataset.slideId = i;
 			newSlide.appendChild(slide);
 			newSlide.appendChild(notesWrapper);
@@ -58,6 +57,8 @@ function init() {
 			slideContainer.appendChild(newSlide);
 		}
 		document.body.prependChild(slideContainer);
+
+		document.body.classList.remove('post');
 	})
 	.then(function () {
 
@@ -74,7 +75,7 @@ function init() {
 				ASlides.prototype.plugins.interactionTouch({ // has configuration
 					use: ['swipe-back']
 				}),
-				ASlides.prototype.plugins.bridgeServiceWorker
+				// ASlides.prototype.plugins.bridgeServiceWorker
 			]
 		});
 
@@ -88,6 +89,8 @@ function init() {
 	});
 }
 
+const oldHash = location.hash || '#1';
+
 if (location.hash === '#aslides') {
 	window.location.hash = '#1';
 	init();
@@ -95,7 +98,7 @@ if (location.hash === '#aslides') {
 	function locationHashChanged() {
 		if (location.hash === '#aslides') {
 			window.removeEventListener('hashchange', locationHashChanged);
-			window.location.hash = '#1';
+			window.location.hash = oldHash;
 			init();
 		}
 	}
