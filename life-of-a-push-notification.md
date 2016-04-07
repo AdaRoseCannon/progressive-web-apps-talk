@@ -4,7 +4,7 @@ title: Progressive Web App V1
 description: First draft of progressive webapp stuff
 ---
 
-# progressive-web-apps-talk
+# Life of a Push Notification
 
 [Convert to Slide Deck](#aslides)
 
@@ -30,11 +30,10 @@ I'd like to ask a few questions before I start.
 * Who here is mostly a Web Developer?
   * Who here has built a progressive webapp before?
 
->
-># Progressive Web Apps
->
->## Ada Rose Edwards - Financial Times
->
+<blockquote class="dark" style="background-image: url('images/bird1.jpg');">
+<h1>Progressive Web Apps</h1>
+<h2>Ada Rose Edwards - Financial Times</h2>
+</blockquote>
 
 ## What is a progressive web app?
 
@@ -52,7 +51,7 @@ I'd like to ask a few questions before I start.
 > Mind Map Goes here
 > http://labs.ft.com/2012/06/what-exactly-is-an-app/
 
-## Are they new?
+## Push Notifications
 
  * Progressive Web Apps are not new. The Financial Times has been using if for it's digital content delivery since 2012:
  * Back then we were breaking a lot of new ground and it was very difficult
