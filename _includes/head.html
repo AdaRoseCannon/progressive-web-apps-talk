@@ -27,4 +27,16 @@
 	<link rel="stylesheet" href="{{ site.aslide }}/a-slides.css">
 	<link rel="stylesheet" href="styles/post.css">
 	<link rel="stylesheet" href="{{page.prefix}}styles/slides.css">
+	{% if page.script %}
+	<script src="{{page.script}}"></script>
+	{% endif %}
+	{% if page.script1 %}
+	<script src="{{page.script1}}"></script>
+	{% endif %}
+	{% if page.script2 %}
+	<script src="{{page.script2}}"></script>
+	{% endif %}
+	{% if page.script3 %}
+	<script src="{{page.script3}}"></script>
+	{% endif %}
 </head>

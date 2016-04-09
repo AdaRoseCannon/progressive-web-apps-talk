@@ -5,7 +5,6 @@
  * WTH amazing right!!
  */
 
-
 'use strict';
 
 function addStyle(url){
@@ -62,7 +61,7 @@ function init() {
 	})
 	.then(function () {
 
-		const slideData = [];
+		const slideData = window.aSlidesSlideData || [];
 		const slideContainer = document.querySelector('.a-slides_slide-container');
 
 		new ASlides(slideData, {
@@ -91,8 +90,10 @@ function init() {
 
 const oldHash = location.hash || '#1';
 
-if (location.hash === '#aslides') {
-	window.location.hash = '#1';
+if (location.hash === '#aslides' || true) {
+	if (location.hash === '#aslides') {
+		window.location.hash = '#1';
+	}
 	init();
 } else {
 	function locationHashChanged() {
