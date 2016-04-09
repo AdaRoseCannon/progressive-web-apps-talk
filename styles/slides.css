@@ -15,6 +15,10 @@
 	background-size: cover;
 }
 
+.a-slides_notes {
+	background-color: lavenderblush;
+}
+
 .a-slides_slide-content.dark {
 	background-color: darkslategray;
 	background-blend-mode: soft-light;
