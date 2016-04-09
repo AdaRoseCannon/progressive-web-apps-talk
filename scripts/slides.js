@@ -1,15 +1,5 @@
 'use strict';
-
-/**
- * Constants
- */
 /* global ASlides*/
-
-
-/**
- * Dependencies
- */
-
 
 (function () {
 	const slideData = [];
