@@ -65,12 +65,61 @@ http://labs.ft.com/2012/06/what-exactly-is-an-app/
 
 ## Prerequisits for a push notification
 
+* Specifically we are looking at producing a web app for the Chromium 44 based Samsung browser.
+
 <blockquote class="dark" id="splash-slide" style="background-image: url('images/nest.jpg');">
 <h1>Prerequisits for a push notification</h1>
 </blockquote>
 
-* Specifically we are looking at producing a web app for the Chromium 44 based Samsung browser.
-*
+Were going to begin with a Web App manifest. The top part is standard.
+
+It defines the name on the home screen how the app should orientate itself and whether to hide the browser chrome,
+i.e. whether it looks like a native app, rather than a web page when launched from the home screen.
+
+It defines an icon, and the URL the app should use to start, in this case I add a ?standalone suffix for detecting installs with Analytics.
+
+But the last three properties are Chrome specific, the one pertinent to us is `gcm_sender_id` without this the app won't even try prompting for push notifications.
+
+The GCM in gcm_sender_id stands for Google Cloud Messaging and this is where we go next to get our ID
+
+> manifest.json:
+>
+> ```json
+{
+  "name": "81 Emoji",
+  "icons": [
+    {
+      "src": "launcher-icon-4x.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "density": 4.0
+    }
+  ],
+  "start_url": "/?standalone",
+  "display": "standalone",
+>  "orientation": "portrait",
+>
+>  "gcm_sender_id": "90157766285",
+  "background_color": "lavenderblush",
+  "theme_color": "lavenderblush"
+}
+> ```
+
+* Google Cloud Messaging handles the push notifications. Which requires a google developer account.
+* Use this website to set up a project and get an API key for `Google Cloud Messaging`
+
+> # https://console.developers.google.com
+> ![Google Cloud Messaging, in the dashboard](images/gcm-dashboard.png)
+
+Finding your ID is difficult, it takes me a while to find and I've done it few times before so this is where you find it:
+
+Insert your project ID minus the hash as your `gcm_sender_id`
+
+> #Finding your Id
+> ![Finding Your Id](images/finding_gcm_sender_id.png)
+> ![Finding Your Id](images/finding_gcm_sender_id2.png)
+
+
 
 ## Thanks
 
