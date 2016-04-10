@@ -117,7 +117,12 @@ window.aSlidesSlideData = {
 				const n2 = children[i + 2];
 				if (n2 && (n2.textContent === 'then' || n2.textContent === 'catch')) {
 					n.classList.add('hide-after');
+					const scrollTop = this.scrollTop;
 					n.scrollIntoViewIfNeeded();
+					const newScrollTop = this.scrollTop;
+					this.scrollTop = scrollTop;
+					scrollTo(this, newScrollTop, 1000);
+
 					yield;
 					n.classList.remove('hide-after');
 				}
@@ -129,3 +134,20 @@ window.aSlidesSlideData = {
 		}
 	}
 };
+
+function scrollTo(el, newTop, scrollDuration) {
+	const oldTop =  el.scrollTop;
+    const scrollHeight = oldTop - newTop;
+	const scrollStep = Math.PI / ( scrollDuration / 16 );
+    const cosParameter = scrollHeight / 2;
+    let scrollCount = 0;
+	let scrollMargin;
+    requestAnimationFrame(function step () {
+		if ( Math.abs(el.scrollTop - newTop) > 5 ) {
+			requestAnimationFrame(step);
+			scrollCount = scrollCount + 1;
+			scrollMargin = cosParameter - cosParameter * Math.cos( scrollCount * scrollStep );
+			el.scrollTop = oldTop - scrollMargin;
+		}
+    });
+}

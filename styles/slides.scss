@@ -9,6 +9,11 @@
 		display: block;
 	}
 
+	.a-slides_notes {
+		background-color: lavenderblush;
+		box-shadow: 0 0 2em rgba(0,0,0,0.4);
+	}
+
 	.a-slides_slide-content {
 		background-color: white;
 		display: flex;
@@ -22,13 +27,8 @@
 
 		& > p {
 			min-width: 20%;
-		}
-
-		.a-slides_notes {
-			background-color: lavenderblush;
-		}
-
-		& p {
+			max-height: 100%;
+			max-width: 100%;
 			display: flex;
 			flex-grow: 1;
 		}

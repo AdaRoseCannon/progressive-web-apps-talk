@@ -32,7 +32,7 @@ function addScript (url) {
 }
 
 function init() {
-	Promise.all([
+	return Promise.all([
 		addScript('https://cdn.rawgit.com/AdaRoseEdwards/dirty-dom/v1.3.1/build/dirty-dom-lib.min.js').promise,
 		addScript('https://rawgit.com/AdaRoseEdwards/a-slides/master/build/a-slides.js').promise
 	])
@@ -45,11 +45,16 @@ function init() {
 		let i=0;
 		while (slide = $('body > blockquote')) {
 			i++;
+			let name = '';
 			const notes = slide.prevAll();
 			const newSlide = document.createElement('div').setClassName('a-slides_slide');
 			const notesWrapper = document.createElement('div').setClassName('a-slides_notes');
 			slide.classList.add('a-slides_slide-content');
-			newSlide.dataset.slideId = i;
+			if (notes[0] && notes[0].tagName.match(/h[0-6]/i)) {
+				name = notes[0].textContent.trim().replace(/[^A-Za-z0-9]/ig, '-').toLowerCase();
+				name = name + (slideContainer.querySelectorAll(`[data-slide-id="${name}"]`).length || '');
+			}
+			newSlide.dataset.slideId = 'slide-' + (name || i);
 			newSlide.appendChild(slide);
 			newSlide.appendChild(notesWrapper);
 			notes.forEach(note => notesWrapper.appendChild(note));
@@ -85,22 +90,29 @@ function init() {
 		if (location.search === '?notes') {
 			slideContainer.classList.add('hide-presentation');
 		}
+
+		return slideContainer;
 	});
 }
 
-const oldHash = location.hash || '#1';
+const oldHash = location.hash || false;
 
 if (location.hash === '#aslides' || location.search.indexOf('aslides') !== -1) {
-	if (location.hash === '#aslides') {
-		window.location.hash = '#1';
-	}
-	init();
+	init().then(slideContainer => {
+		if (location.hash === '#aslides' || oldHash === false) {
+			slideContainer.fire('a-slides_goto-slide', {slide: 0});
+		} else {
+			slideContainer.fire('a-slides_goto-slide', {slide: $(`[data-slide-id="${oldHash.substr(1,Infinity)}"]`)});
+		}
+	});
 } else {
 	function locationHashChanged() {
 		if (location.hash === '#aslides') {
 			window.removeEventListener('hashchange', locationHashChanged);
 			window.location.hash = oldHash;
-			init();
+			init().then(slideContainer => {
+				slideContainer.fire('a-slides_goto-slide', {slide: oldHash ? $(`[data-slide-id="${oldHash.substr(1,Infinity)}"]`) : 0});
+			});
 		}
 	}
 	window.addEventListener('hashchange', locationHashChanged);
