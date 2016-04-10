@@ -175,6 +175,7 @@ One can use Service Workers to make your Web App work offline, by intercepting r
 
 This will make your site robust on poor wireless networks, e.g. conferences or whilst roaming and speed up access to Cached content.
 
+The service worker is only available over https because it's so powerful. On http a malicious third-party could change your site and cache it forever
 
 > ```
                 +-------------------------------------------------+
@@ -276,6 +277,22 @@ In the first run case where we have not subscribed we present a banner which upo
 
 Subscribing is more complex but it's not that ugly.
 
+1. The user has requested a push notification subscription via a click event.
+1. We show a spinner on the banner to show something is going on.
+
+1. Firstly we trigger subscribe on the service worker registration.
+1. This has an optional parameter. Where optional means include it if you want it to work.
+1. "userVisibleOnly indicates that the push subscription will only be used for push messages whose effect is made visible to the user, for example by displaying a Web Notification. "
+
+2. At this point if we haven't already got push permission the browser will request it
+2. if all was successful great, we're done. Hide the banner.
+2. We can post the notification details to the server for using later.
+
+3. Otherwise something went wrong, either the user refused to allow push notifications.
+3. Or we missed a step setting everything up.
+
+4. Finally remove the spinner from the banner
+
 > ```javascript
 > // Make the banner semi transparent so it is clear something is happening
 > pushBanner.classList.add('working');
@@ -298,10 +315,7 @@ Subscribing is more complex but it's not that ugly.
 > })
 > .catch(function(e) {
 > 	if (Notification.permission === 'denied') {
->
-> 		// reshow the banner to prompt them again
-> 		pushBanner.style.display = '';
-> 		warn('Permission for Notifications was denied');
+> 		notify.warn('Permission for Notifications was denied');
 > 	} else {
 >
 > 		// A problem occurred with the subscription; common reasons
@@ -317,6 +331,35 @@ Subscribing is more complex but it's not that ugly.
 > 	pushBanner.classList.remove('working');
 > });
 > ```
+
+# The subscription details.
+
+Object for chrome looks different has special case.
+
+> Subscription request
+
+# Receiving push notifications
+
+> # Receiving push notifications
+> title page
+> picture of baby birds
+
+# Receiving push notifications service worker code.
+
+step through sw code
+
+> sw code
+
+# Sending a push notification
+
+> title page
+
+# Sending a push notification Code
+
+> curl
+> fetch on server
+
+> show demo video of notification and it being tapped on
 
 ## Thanks
 

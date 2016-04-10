@@ -131,10 +131,12 @@ window.aSlidesSlideData = {
 		},
 		teardown(){
 			this.$$('.hide-after').forEach(n => n.classList.remove('hide-after'));
+			cancelAnimationFrame(anim);
 		}
 	}
 };
 
+let anim;
 function scrollTo(el, newTop, scrollDuration) {
 	const oldTop =  el.scrollTop;
     const scrollHeight = oldTop - newTop;
@@ -142,8 +144,8 @@ function scrollTo(el, newTop, scrollDuration) {
     const cosParameter = scrollHeight / 2;
     let scrollCount = 0;
 	let scrollMargin;
-    requestAnimationFrame(function step () {
-		if ( Math.abs(el.scrollTop - newTop) > 5 ) {
+    anim = requestAnimationFrame(function step () {
+		if ( Math.abs(el.scrollTop - newTop) > 5 && scrollCount * scrollStep < Math.PI) {
 			requestAnimationFrame(step);
 			scrollCount = scrollCount + 1;
 			scrollMargin = cosParameter - cosParameter * Math.cos( scrollCount * scrollStep );
