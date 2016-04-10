@@ -274,17 +274,21 @@ In the first run case where we have not subscribed we present a banner which upo
 
 ## Finally Subscribing
 
-Subscribing is a lttle more complex but it is not that ugly.
+Subscribing is more complex but it's not that ugly.
 
 > ```javascript
 > // Make the banner semi transparent so it is clear something is happening
 > pushBanner.classList.add('working');
 >
-> swPromise.then(
+> swPromise
+> .then(
 > 	serviceWorkerRegistration =>
 >		serviceWorkerRegistration
 >		.pushManager
->		.subscribe({userVisibleOnly: true})
+>		.subscribe({
+>           // Required parameter
+>			userVisibleOnly: true
+>		})
 > )
 > .then(function(subscription) {
 >
