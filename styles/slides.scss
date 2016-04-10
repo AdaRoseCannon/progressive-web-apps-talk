@@ -1,0 +1,56 @@
+---
+# this ensures Jekyll reads the file to be transformed into CSS later
+# only Main files contain this front matter, not partials.
+---
+
+.a-slides_slide {
+
+	#splash-slide {
+		display: block;
+	}
+
+	.a-slides_slide-content {
+		background-color: white;
+		display: flex;
+		font-size: 1.8em;
+		font-weight: 900;
+		font-family: Lato;
+		align-items: stretch;
+		justify-content: flex-start;
+		align-content: flex-start;
+		flex-direction: column;
+
+		& > p {
+			min-width: 20%;
+		}
+
+		.a-slides_notes {
+			background-color: lavenderblush;
+		}
+
+		& p {
+			display: flex;
+			flex-grow: 1;
+		}
+
+		& h1,
+		& h2,
+		& h3 {
+			width: 100%;
+		}
+
+		& img,
+		& video {
+			width: 0;
+			object-fit: contain;
+			flex-grow: 1;
+		}
+	}
+}
+
+footer {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}

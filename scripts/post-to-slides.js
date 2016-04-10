@@ -90,7 +90,7 @@ function init() {
 
 const oldHash = location.hash || '#1';
 
-if (location.hash === '#aslides' || true) {
+if (location.hash === '#aslides' || location.search.indexOf('aslides') !== -1) {
 	if (location.hash === '#aslides') {
 		window.location.hash = '#1';
 	}

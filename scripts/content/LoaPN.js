@@ -2,7 +2,7 @@
 /* global d3 */
 
 window.aSlidesSlideData = {
-	3: {
+	'slide-what-is-a-progressive-web-app-': {
 		setup() {},
 		action: function *() {
 
@@ -101,6 +101,31 @@ window.aSlidesSlideData = {
 		},
 		teardown() {
 			this.innerHTML = '';
+		}
+	},
+	'slide-finally-subscribing': {
+		setup(){
+			this.$$('.hide-after').forEach(n => n.classList.remove('hide-after'));
+
+		},
+		action: function *() {
+			const codeTarget = this.$('code');
+			codeTarget.scrollIntoView();
+			const children = Array.from(codeTarget.children);
+			for (let i = 0; i < children.length; i++) {
+				const n = children[i];
+				const n2 = children[i + 2];
+				if (n2 && (n2.textContent === 'then' || n2.textContent === 'catch')) {
+					n.classList.add('hide-after');
+					n.scrollIntoViewIfNeeded();
+					yield;
+					n.classList.remove('hide-after');
+				}
+			}
+			yield;
+		},
+		teardown(){
+			this.$$('.hide-after').forEach(n => n.classList.remove('hide-after'));
 		}
 	}
 };
