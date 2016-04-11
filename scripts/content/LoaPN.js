@@ -71,7 +71,7 @@ window.aSlidesSlideData = {
 			yield;
 
 			let i = 1;
-			for (const o of item) {
+			for (let o of item) {
 				const node = {
 					label: o,
 					id: String(i++),

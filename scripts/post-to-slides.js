@@ -1,11 +1,10 @@
+'use strict';
 /* global $, ASlides*/
 
 /**
  * Turns a normal mrkdown blog posti into a slide deck!!
  * WTH amazing right!!
  */
-
-'use strict';
 
 function addStyle(url){
 	const styles = document.createElement('link');
@@ -95,17 +94,7 @@ function init() {
 	});
 }
 
-const oldHash = location.hash || false;
-
-if (location.hash === '#aslides' || location.search.indexOf('aslides') !== -1) {
-	init().then(slideContainer => {
-		if (location.hash === '#aslides' || oldHash === false) {
-			slideContainer.fire('a-slides_goto-slide', {slide: 0});
-		} else {
-			slideContainer.fire('a-slides_goto-slide', {slide: $(`[data-slide-id="${oldHash.substr(1,Infinity)}"]`)});
-		}
-	});
-} else {
+(function () {
 	function locationHashChanged() {
 		if (location.hash === '#aslides') {
 			window.removeEventListener('hashchange', locationHashChanged);
@@ -115,5 +104,18 @@ if (location.hash === '#aslides' || location.search.indexOf('aslides') !== -1) {
 			});
 		}
 	}
-	window.addEventListener('hashchange', locationHashChanged);
-}
+
+	const oldHash = location.hash || false;
+
+	if (location.hash === '#aslides' || location.search.indexOf('aslides') !== -1) {
+		init().then(slideContainer => {
+			if (location.hash === '#aslides' || oldHash === false) {
+				slideContainer.fire('a-slides_goto-slide', {slide: 0});
+			} else {
+				slideContainer.fire('a-slides_goto-slide', {slide: $(`[data-slide-id="${oldHash.substr(1,Infinity)}"]`)});
+			}
+		});
+	} else {
+		window.addEventListener('hashchange', locationHashChanged);
+	}
+}());
