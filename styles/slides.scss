@@ -45,6 +45,13 @@
 			width: 0;
 			object-fit: contain;
 			flex-grow: 1;
+			flex-shrink: 1;
+			height: 100%;
+			max-height: calc(100vh - 8em);
+		}
+
+		& video {
+			width: auto;
 		}
 	}
 }

@@ -104,7 +104,23 @@ window.aSlidesSlideData = {
 		}
 	},
 	'slide-finally-subscribing': scrollCodeBlock(/^(then|catch)$/, 2),
-	'slide-code-fetch': scrollCodeBlock(/^\/\//, 1)
+	'slide-code-fetch': scrollCodeBlock(/^\/\//, 1),
+	'slide-receiving-push-notifications-service-worker--code--': scrollCodeBlock(/^\/\//, 1),
+	'slide-demo': {
+		setup() {
+		},
+		action: function *() {
+			this.dataset.timeout = setTimeout(() => this.parentNode.parentNode.fire('a-slides_trigger-event'), 1000);
+			yield;
+			this.$('video').play();
+			yield;
+		},
+		teardown() {
+			clearTimeout(this.dataset.timeout);
+			this.$('video').pause();
+			this.$('video').currentTime = 0;
+		}
+	}
 };
 
 function scrollCodeBlock(divider, lookahead) {
@@ -121,6 +137,12 @@ function scrollCodeBlock(divider, lookahead) {
 				const n = children[i];
 				const n2 = children[i + lookahead];
 				if (n2 && n2.textContent.match(divider)) {
+					const n3 = children[i + lookahead + 1];
+
+					// consequitive matches all count as one
+					if (n3 && n3.textContent.match(divider)) {
+						continue;
+					}
 					n.classList.add('hide-after');
 					yield;
 					scrollTo(this, n.offsetTop - children[0].offsetTop, 1000);

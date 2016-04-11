@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Progressive Web App V1
+title: Push Notifications and Progressive Web Apps
 description: First draft of progressive webapp stuff
 script: https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js
 script1: scripts/content/LoaPN.js
@@ -12,7 +12,6 @@ script1: scripts/content/LoaPN.js
 
 Talk plan for SDC
 Length 15-15mins, with demo.
-# Plan
 
 ## Introduction
 
@@ -414,19 +413,96 @@ This is where we break out the API key we got when setting up our project for Go
 > });
 >```
 
-> show demo video of notification and it being tapped on
-
 # Receiving push notifications
+
+When the client receiving the response from the Push Notification Server it does not go to the window.
+
+Which makes sense because there could be more (or less) than one window and all windows share the same service worker.
+
+If there are no open windows and the service worker is not running, when a push notification arrives,
+
+The browser will even fire up the service worker just to handle the notification.
 
 <blockquote class="dark" style="background-image: url('images/baby-birds.jpg');">
 <h1>Receiving Push Notifications</h1>
 </blockquote>
 
-# Receiving push notifications service worker code.
+# Receiving push notifications service worker (code).
 
-step through sw code
+So this code runs in the service worker to handle push notifications.
 
-> sw code
+Sorry this is the last long chunk of code.
+
+Then I can show it to you working.
+
+> In the service worker:
+>
+> ```javascript
+> // Setup Event Listener
+> self.addEventListener('push', function(event) {
+>
+> 	// Ensure notification support
+> 	if (!('showNotification' in ServiceWorkerRegistration.prototype)) {
+> 		console.warn('Notifications aren\'t supported.');
+> 		return;
+> 	}
+>
+> 	// Display a notification
+> 	event.waitUntil(
+> 		getMessageDetails(event)
+> 		.then(details => self.registration.showNotification(details.title, details));
+> 	);
+> });
+>
+> // Function for retreiving server data
+> function getMessage(event) {
+>
+> 	// Query the server to find out what to show.
+> 	const data = fetchLatestMessageFromAPI();
+>
+> 	// Find any open windows and get them to update,
+> 	// In this case I have has change listeners but
+> 	// window.postMessage should work too.
+> 	//
+> 	// One way of triggering UI updates without using
+> 	// sockets or polling
+> 	const reload = clients.matchAll({
+> 		type: 'window'
+> 	})
+> 	.then(function (windows) {
+> 		windows.forEach(function (w) {
+> 			w.navigate('/#refresh');
+> 		});
+> 	});
+>
+> 	return Promise.all([data, reload]).then(() => data);
+> }
+>
+> // We can even handle how it behaves on click.
+> self.addEventListener('notificationclick', function(event) {
+>
+> 	// Close the notification
+> 	event.notification.close();
+>
+> 	// This looks to see if any windows are open and tries to focus one.
+> 	// Otherwise it just opens a new window.
+> 	event.waitUntil(clients.matchAll({
+> 		type: 'window'
+> 	}).then(function(clientList) {
+> 		for (let i = 0; i < clientList.length; i++) {
+> 			const client = clientList[i];
+> 			if ('focus' in client) {
+> 				return client.focus();
+> 			}
+> 		}
+> 		if (clients.openWindow) return clients.openWindow('/');
+> 	}));
+> });
+> ```
+
+# Demo
+
+> <video src="images/demo.mp4" autoplay="false" preload="true" controls="true"></video>
 
 ## Thanks
 
