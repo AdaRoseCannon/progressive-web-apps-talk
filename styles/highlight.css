@@ -1,6 +1,8 @@
 .highlight {
 	background-color: #333;
 	color: white;
+	white-space: pre-wrap;
+    word-break: break-word;
 }
 
 .highlight .hll { background-color: #49483e }

@@ -103,38 +103,38 @@ window.aSlidesSlideData = {
 			this.innerHTML = '';
 		}
 	},
-	'slide-finally-subscribing': {
+	'slide-finally-subscribing': scrollCodeBlock(/^(then|catch)$/, 2),
+	'slide-code-fetch': scrollCodeBlock(/^\/\//, 1)
+};
+
+function scrollCodeBlock(divider, lookahead) {
+	return {
 		setup(){
 			this.$$('.hide-after').forEach(n => n.classList.remove('hide-after'));
-
+			cancelAnimationFrame(anim);
 		},
 		action: function *() {
 			const codeTarget = this.$('code');
-			codeTarget.scrollIntoView();
 			const children = Array.from(codeTarget.children);
+			this.scrollTop = 0;
 			for (let i = 0; i < children.length; i++) {
 				const n = children[i];
-				const n2 = children[i + 2];
-				if (n2 && (n2.textContent === 'then' || n2.textContent === 'catch')) {
+				const n2 = children[i + lookahead];
+				if (n2 && n2.textContent.match(divider)) {
 					n.classList.add('hide-after');
-					const scrollTop = this.scrollTop;
-					n.scrollIntoViewIfNeeded();
-					const newScrollTop = this.scrollTop;
-					this.scrollTop = scrollTop;
-					scrollTo(this, newScrollTop, 1000);
-
 					yield;
+					scrollTo(this, n.offsetTop - children[0].offsetTop, 1000);
 					n.classList.remove('hide-after');
 				}
 			}
 			yield;
 		},
 		teardown(){
-			this.$$('.hide-after').forEach(n => n.classList.remove('hide-after'));
 			cancelAnimationFrame(anim);
+			this.$$('.hide-after').forEach(n => n.classList.remove('hide-after'));
 		}
-	}
-};
+	};
+}
 
 let anim;
 function scrollTo(el, newTop, scrollDuration) {
@@ -146,7 +146,7 @@ function scrollTo(el, newTop, scrollDuration) {
 	let scrollMargin;
     anim = requestAnimationFrame(function step () {
 		if ( Math.abs(el.scrollTop - newTop) > 5 && scrollCount * scrollStep < Math.PI) {
-			requestAnimationFrame(step);
+			anim = requestAnimationFrame(step);
 			scrollCount = scrollCount + 1;
 			scrollMargin = cosParameter - cosParameter * Math.cos( scrollCount * scrollStep );
 			el.scrollTop = oldTop - scrollMargin;

@@ -11,7 +11,7 @@
 
 	.a-slides_notes {
 		background-color: lavenderblush;
-		box-shadow: 0 0 2em rgba(0,0,0,0.4);
+		border: 1px solid grey;
 	}
 
 	.a-slides_slide-content {
@@ -31,6 +31,7 @@
 			max-width: 100%;
 			display: flex;
 			flex-grow: 1;
+			flex-shrink: 0;
 		}
 
 		& h1,

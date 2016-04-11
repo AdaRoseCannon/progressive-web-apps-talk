@@ -35,11 +35,17 @@ I'd like to ask some questions before I start.
 ## Push Notifications
 
 Progressive Web Apps are not new. The Financial Times chose to use a Web App for digital content delivery on mobile devices since 2012.
+
 Moving to a Web App enabled the same app to ship across platforms using a single distribution channel.
+
 It also allowed us to bypass app stores.
+
 That said it did come with its' own difficulties:
+
 We had to use the infamous appcache to enable offline support.
+
 Difficulties arose when different platforms supported different API features. These differences need a polyfill or the feature should be avoided entirely.
+
 Since that time features have gained support across platforms and new technologies which are useful for Web Apps such as service workers have emerged.
 
 >![First Version of the FT Web App](images/ipad-home.jpg)
@@ -114,6 +120,7 @@ The GCM in gcm_sender_id stands for Google Cloud Messaging and this is where we 
 
 * Google Cloud Messaging handles the push notifications. Which requires a google developer account.
 * Use this website to set up a project and get an API key for `Google Cloud Messaging`
+* Write down this API key you'll need it later.
 
 > ## https://console.developers.google.com
 > ![Google Cloud Messaging, in the dashboard](images/gcm-dashboard.png)
@@ -169,6 +176,7 @@ Your app receives push notifications via a Service Worker.
 ## The Service Worker
 
 The service worker is a special shared worker. It acts like a proxy between browser tabs and the larger web allowing one to rewrite requests and responses on the fly.
+
 The service worker can outlive your open tabs and the browser will start your service worker when it receives a push notification.
 
 One can use Service Workers to make your Web App work offline, by intercepting requests and serving them from the cache whilst quietly updating the cache in the background.
@@ -293,10 +301,13 @@ Subscribing is more complex but it's not that ugly.
 
 4. Finally remove the spinner from the banner
 
+> client/scripts/lib/push-notifications.js
+>
 > ```javascript
 > // Make the banner semi transparent so it is clear something is happening
 > pushBanner.classList.add('working');
 >
+> // get the serverWorkerRegistration object from the earlier instantiation promise
 > swPromise
 > .then(
 > 	serviceWorkerRegistration =>
@@ -334,15 +345,82 @@ Subscribing is more complex but it's not that ugly.
 
 # The subscription details.
 
-Object for chrome looks different has special case.
+The subscription details provide an endpoint which the server side can query to send a push notification.
 
-> Subscription request
+We'll fire this up to the server to use later.
+
+> ```json
+> {
+>  "endpoint": "http://example.com/some/uuid"
+> }
+>```
+>
+> In this case the url looks something like:
+>
+> <span style="word-break: break-all; font-family: monospace; font-size: 0.8em;">"https://android.googleapis.com/gcm/send/
+> cz6YgbRXHAc:APA91bGWtm35_kAQsZEn_Ye…EVXj1
+> MDXGulbtBWJYw4AGcIWXq7p5BjhFhnDhMQoqOHRzY
+> 9jI_OeOn_DQ5W_cYD5tCDDdjOD7d"</span>
+>
+> https://developer.mozilla.org/en-US/docs/Web/API/PushSubscription
+
+# Sending a push notification
+
+Now we have an endpoint we can use to fire off notifications when ever we want.
+
+Each endpoint will provide a different address, for the case of Chrome and the Samsung browser it's google cloud messaging.
+
+This is where we break out the API key we got when setting up our project for Google Cloud Messaging.
+
+<blockquote class="dark" style="background-image: url('images/bird2.jpg');">
+<h1>Sending a push notification</h1>
+</blockquote>
+
+# Sending a push notification Details
+
+> cURL
+>
+> ```bash
+> curl --header "Authorization: key=AIzaSyAc2e8MeZHA5NfhPANea01wnyeQD7uVY0c" --header "Content-Type: application/json" https://android.googleapis.com/gcm/send -d "{\"registration\_ids\":[\"APA91bE9DAy6\_p9bZ9I58rixOv-ya6PsNMi9Nh5VfV4lpXGw1wS6kxrkQbowwBu17ryjGO0ExDlp-S-mCiwKc5HmVNbyVfylhgwITXBYsmSszpK0LpCxr9Cc3RgxqZD7614SqDokwsc3vIEXkaT8OPIM-mnGMRYG1-hsarEU4coJWNjdFP16gWs\"]}"
+>```
+> (not a real API key)
+
+# Code fetch
+> Isomorphic fetch in a node.js server
+>
+>```javascript
+>
+> // query the db for my id
+> const id = getSubscriptionIdForUser('lady_ada_king');
+>
+> // Get API key from environment variable.
+> const GCM_KEY = process.env['GCM_API_KEY'];
+>
+> const fetch = require('node-fetch');
+>
+> // Set the api key in the header
+> const headers = new fetch.Headers({
+> 	'Content-Type': 'application/json',
+> 	Authorization: `key=${GCM_KEY}`
+> });
+>
+> // Request push notification from Google Cloud Messaging
+> fetch('https://android.googleapis.com/gcm/send', {
+> 	method: 'POST',
+> 	headers,
+> 	body: JSON.stringify({
+> 		registration_ids: [id]
+> 	})
+> });
+>```
+
+> show demo video of notification and it being tapped on
 
 # Receiving push notifications
 
-> # Receiving push notifications
-> title page
-> picture of baby birds
+<blockquote class="dark" style="background-image: url('images/baby-birds.jpg');">
+<h1>Receiving Push Notifications</h1>
+</blockquote>
 
 # Receiving push notifications service worker code.
 
@@ -350,23 +428,18 @@ step through sw code
 
 > sw code
 
-# Sending a push notification
-
-> title page
-
-# Sending a push notification Code
-
-> curl
-> fetch on server
-
-> show demo video of notification and it being tapped on
-
 ## Thanks
 
 Thank you for listening I hope you have a successful app
 
-> ![FT APP on a Balloon!](images/FinancialTimes_G-FTUS_Balloon_LordMayorsAppeal.jpg)
 
+<blockquote class="dark" style="background-image: url('images/FinancialTimes_G-FTUS_Balloon_LordMayorsAppeal.jpg'); background-color: rgba(107, 107, 123, 0.8) !important;">
+<h1>Thank you for listening</h1>
+</blockquote>
+
+> # Good Reading
+> Loads on MDN, this covers lot though: https://developer.mozilla.org/en-US/docs/Web/API/Push_API/Using_the_Push_API
+>
 > # Image Attributions
 >
 > * https://www.flickr.com/photos/dreynolds/6930648214
