@@ -1,7 +1,8 @@
 ---
 layout: post
 title: Push Notifications and Progressive Web Apps
-description: First draft of progressive webapp stuff
+description: First draft of progressive webapp
+image: https://ada.is/progressive-web-apps-talk/images/FinancialTimes_G-FTUS_Balloon_LordMayorsAppeal.jpg
 script: https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js
 script1: scripts/content/LoaPN.js
 ---
@@ -17,6 +18,10 @@ Length 15-15mins, with demo.
 
 I'm Ada Edwards from the Financial Times, I'm here to talk about Progressive Web Apps.
 
+## **Note to self:** Speak slowly no one can understand your accent.
+
+Firstly a heads up this will be pretty code heavy but the notes are online so you can follow along or read later.
+
 I'd like to ask some questions before I start.
 
 * Who here is a primarily a native app developer?
@@ -25,9 +30,9 @@ I'd like to ask some questions before I start.
   * Who here has built a progressive Web App before?
 
 <blockquote class="dark" id="splash-slide" style="background-image: url('images/bird1.jpg');">
-<h1>Progressive Web Apps</h1>
+<h1>{{ site.name }}</h1>
 <div class="labs-logo"></div>
-<h3>Life of a push notification</h3>
+<h3>{{ site.description }}</h3>
 <h2>Ada Rose Edwards - Financial Times</h2>
 </blockquote>
 
@@ -51,7 +56,9 @@ Since that time features have gained support across platforms and new technologi
 
 ## What is a progressive web app?
 
-* A progressive web app is a type of website which exhibits certain *app-like* properties.
+## **Note to self**: Remember to **read the descriptions** don't just rush through!
+
+A progressive web app is a type of website which exhibits certain *app-like* properties.
 
 (Mind map slide)
 
@@ -60,37 +67,44 @@ Since that time features have gained support across platforms and new technologi
 * **📱💻** - **Responsive** - Perfectly filling the screen, These sites are primarily aimed at mobile and tablets so will need to respond to the plethera of screen sizes. They should also just work as desktop websites too.
 * **http://** - **On the open web** - Not locked in to any browser or app store.
 * **👉** - **Touch capable** - An interface designed for touch with Gesture interaction
-* **🔔** - **Push Notifications** - Not applicable for everyone but is very app-like
+* **🔔** - **Push Notifications** - The ability to receive notifications when the app is not running. Not applicable for everyone but is very app-like
 
 http://labs.ft.com/2012/06/what-exactly-is-an-app/
 
 * Were going to explore creating push notifications.
 
->
+<blockquote class="a-slides_slide-content" style="height: 661px;"><svg width="664" height="661"><line class="link" x1="332" y1="330.5" x2="223.8337647934483" y2="547.401729650129"></line><line class="link" x1="332" y1="330.5" x2="89.82259729248248" y2="337.9236958559692"></line><line class="link" x1="332" y1="330.5" x2="220.5842330024958" y2="115.20644250647905"></line><line class="link" x1="332" y1="330.5" x2="458.61188788935624" y2="123.87114400350883"></line><line class="link" x1="332" y1="330.5" x2="574.1752919863397" y2="336.29477222460616"></line><line class="link" x1="332" y1="330.5" x2="468.5708742502956" y2="530.7741121038185"></line></svg><span class="node" style="transform: translate(332px, 330.5px) translate(-50%, -50%);">Appiness</span><span class="node" style="transform: translate(223.834px, 547.402px) translate(-50%, -50%);">✈</span><span class="node" style="transform: translate(89.8226px, 337.924px) translate(-50%, -50%);"><span class="home-screen-icon">🐵</span></span><span class="node" style="transform: translate(220.584px, 115.206px) translate(-50%, -50%);">📱💻</span><span class="node" style="transform: translate(458.612px, 123.871px) translate(-50%, -50%);">http://</span><span class="node" style="transform: translate(574.175px, 336.295px) translate(-50%, -50%);">👉</span><span class="node" style="transform: translate(468.571px, 530.774px) translate(-50%, -50%);">🔔</span></blockquote>
 
-## Prerequisits for a push notification
+## Prerequisites for a push notification
 
-* Specifically we are looking at producing a web app for the Chromium 44 based Samsung browser.
+* Specifically we are looking at producing a web app for the **Chromium 44 based** Samsung browser.
 * Chrome requires a non standard parameter in the Web App manifest before you can even ask for notifications so we will start there.
 
 <blockquote class="dark" id="splash-slide" style="background-image: url('images/nest.jpg');">
-<h1>Prerequisits for a push notification</h1>
+<h1>Prerequisites for a push notification</h1>
 </blockquote>
 
 ## Web App Manifest
 
 This is an example Web App manifest for a demo I built for this talk.
 
-The top part of the manifest down to the line break is standard.
+The Web App Manifest defines various properties of a Web App, e.g.
 
-It defines the name on the home screen how the app should orientate itself and whether to hide the browser chrome,
-i.e. whether it looks like a native app, rather than a web page when launched from the home screen.
+* the name on the home screen
+* how the app should orientate itself
+*  whether to hide the browser chrome i.e. whether it looks like a native app, rather than a web page when launched from the home screen.
+
+The top part of the manifest down to the line break is standard.
 
 It defines an icon, and the URL the app should use to start, in this case I add a ?standalone suffix for detecting installs with Analytics.
 
 But the last three properties are Chrome specific, the one pertinent to push notifications is `gcm_sender_id` without this the app won't even try prompting for push notifications.
 
-The GCM in gcm_sender_id stands for Google Cloud Messaging and this is where we go next to get our ID
+The GCM in gcm_sender_id stands for Google Cloud Messaging.
+
+Google cloud messaging handles all of the push notifications for Chrome behind the scenes.
+
+So we need to set this up before we can begin.
 
 > client/manifest.json:
 >
@@ -115,9 +129,11 @@ The GCM in gcm_sender_id stands for Google Cloud Messaging and this is where we 
 }
 > ```
 
-## Google CLoud Messaging
+## Google Cloud Messaging
 
-* Google Cloud Messaging handles the push notifications. Which requires a google developer account.
+* Google Cloud Messaging handles the push notifications.
+* Which requires a google developer account to use.
+* It is free.
 * Use this website to set up a project and get an API key for `Google Cloud Messaging`
 * Write down this API key you'll need it later.
 
@@ -140,6 +156,8 @@ Insert your project ID minus the hash as your `gcm_sender_id`
 ## Update the JSON
 
 Insert it into your manifest under `gcm_sender_id`:
+
+This is the same slide as earlier.
 
 > client/manifest.json:
 >
@@ -168,13 +186,25 @@ Insert it into your manifest under `gcm_sender_id`:
 
 Your app receives push notifications via a Service Worker.
 
+A worker is a piece of JavaScript which runs in a seperate thread to your main page.
+
+The service worker is a special shared worker.
+
+It acts like a proxy between browser tabs and the larger web allowing one to rewrite requests and responses on the fly.
+
+If often gets compared to AppCache but being a worker it can be used much more usefully.
+
+The service worker (and by extension push notifications) are unavailble on iOS but you can progressively enhance offline support by using AppCache.
+
+The service worker will displace AppCache when it is installed.
+
 <blockquote class="dark" id="splash-slide" style="background-image: url('images/bird5.jpg');">
 <h1>Setting up the Service Worker</h1>
 </blockquote>
 
-## The Service Worker
+## The Service
 
-The service worker is a special shared worker. It acts like a proxy between browser tabs and the larger web allowing one to rewrite requests and responses on the fly.
+Once it is installed:
 
 The service worker can outlive your open tabs and the browser will start your service worker when it receives a push notification.
 
@@ -377,6 +407,12 @@ This is where we break out the API key we got when setting up our project for Go
 
 # Sending a push notification Details
 
+The google one is handled a little differently you can't just fire a request at that URL to get a push notification.
+
+You have to form a post request with your API key in the header and all of the final part of the url in the body.
+
+Here it is as a cURL request.
+
 > cURL
 >
 > ```bash
@@ -385,12 +421,15 @@ This is where we break out the API key we got when setting up our project for Go
 > (not a real API key)
 
 # Code fetch
+
+It makese more sense when broken down into a fetch request.
+
 > Isomorphic fetch in a node.js server
 >
 >```javascript
 >
-> // query the db for my id
-> const id = getSubscriptionIdForUser('lady_ada_king');
+> // query the db for my subscription id. (The long string at the end of the endpoint)
+> const subscriptionId = getSubscriptionIdForUser('lady_ada_king');
 >
 > // Get API key from environment variable.
 > const GCM_KEY = process.env['GCM_API_KEY'];
@@ -406,9 +445,9 @@ This is where we break out the API key we got when setting up our project for Go
 > // Request push notification from Google Cloud Messaging
 > fetch('https://android.googleapis.com/gcm/send', {
 > 	method: 'POST',
-> 	headers,
+> 	headers: headers,
 > 	body: JSON.stringify({
-> 		registration_ids: [id]
+> 		registration_ids: [subscriptionId]
 > 	})
 > });
 >```
@@ -435,47 +474,65 @@ Sorry this is the last long chunk of code.
 
 Then I can show it to you working.
 
+1. This takes place in the Event Listener for push events.
+1. When the phone receives a push notification for this app it fires this event on the service worker.
+1. The service worker then does two things.
+  1. Asks any open windows to check for new messages.
+  1. Displays a push notification to the user.
+1. We haven't sent any information with the notification we will get the latest message from the api.
+1. We will then format the message as a notification.
+1. To refresh the pages, we query for open windows.
+1. then we sent a push message
+1. The page can trigger an update when it gets it.
+1. Listen to this message with `navigator.serviceWorker.addEventListener('message', function)`
+1. Handle click
+1. blah, need to finish
+
 > In the service worker:
 >
 > ```javascript
 > // Setup Event Listener
 > self.addEventListener('push', function(event) {
 >
-> 	// Ensure notification support
-> 	if (!('showNotification' in ServiceWorkerRegistration.prototype)) {
-> 		console.warn('Notifications aren\'t supported.');
-> 		return;
-> 	}
->
+>	// The event is completed when we have
+>	// Triggered a refresh on any open windows
 > 	// Display a notification
 > 	event.waitUntil(
-> 		getMessageDetails(event)
-> 		.then(details => self.registration.showNotification(details.title, details));
+>		Promise.all([
+>			refreshOpenWindows(),
+> 			getMessageDetails().then(details => self.registration.showNotification(details.title, details))
+>		])
 > 	);
 > });
 >
-> // Function for retreiving server data
-> function getMessage(event) {
+> // Function for retreiving latest message,
+> // returns a promise.
+> function getMessage() {
+> 	return fetchLatestMessageFromAPI()
+>		.then(function (data) {
+>			return {
+>				title: data.user + 'said: ',
+>				body: data.message,
+>				icon: '/my-app-logo-192x192.png'
+>			};
+>		});
+> }
 >
-> 	// Query the server to find out what to show.
-> 	const data = fetchLatestMessageFromAPI();
->
-> 	// Find any open windows and get them to update,
-> 	// In this case I have has change listeners but
-> 	// window.postMessage should work too.
-> 	//
-> 	// One way of triggering UI updates without using
-> 	// sockets or polling
-> 	const reload = clients.matchAll({
+> // Find any open windows and get them to update,
+> // In this case I have has change listeners but
+> // window.postMessage should work too.
+> //
+> // One way of triggering UI updates without using
+> // sockets or polling
+> function refreshOpenWindows() {
+> 	return clients.matchAll({
 > 		type: 'window'
 > 	})
 > 	.then(function (windows) {
 > 		windows.forEach(function (w) {
-> 			w.navigate('/#refresh');
+> 			w.postMessage({action: 'refresh'});
 > 		});
 > 	});
->
-> 	return Promise.all([data, reload]).then(() => data);
 > }
 >
 > // We can even handle how it behaves on click.
@@ -502,7 +559,13 @@ Then I can show it to you working.
 
 # Demo
 
-> <video src="images/demo.mp4" autoplay="false" preload="true" controls="true"></video>
+> <p><video src="images/demo.mp4" autoplay="false" preload="true" controls="true"></video></p>
+
+# Summary of what we covered
+
+> 1. This
+> 1. That
+> 1. Something else
 
 ## Thanks
 
@@ -516,6 +579,6 @@ Thank you for listening I hope you have a successful app
 > # Good Reading
 > Loads on MDN, this covers lot though: https://developer.mozilla.org/en-US/docs/Web/API/Push_API/Using_the_Push_API
 >
-> # Image Attributions
->
+> # Image Sources
+> * Wikimedia
 > * https://www.flickr.com/photos/dreynolds/6930648214

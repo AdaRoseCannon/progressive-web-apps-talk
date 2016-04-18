@@ -37,8 +37,6 @@ function init() {
 	])
 	.then(function () {
 
-		addStyle('https://rawgit.com/AdaRoseEdwards/a-slides/master/build/a-slides.css');
-
 		const slideContainer = document.createElement('div').setClassName('a-slides_slide-container');
 		let slide;
 		let i=0;
@@ -78,7 +76,7 @@ function init() {
 				ASlides.prototype.plugins.interactionTouch({ // has configuration
 					use: ['swipe-back']
 				}),
-				// ASlides.prototype.plugins.bridgeServiceWorker
+				ASlides.prototype.plugins.bridgeServiceWorker
 			]
 		});
 

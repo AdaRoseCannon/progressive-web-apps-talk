@@ -40,7 +40,7 @@ video {
 body.post {
 	& > h2, & > h3 {
 		margin: 2em 0 1.5em 0;
-		border-bottom: 1px solid grey;
+		border-bottom: 1px solid #DADADA;
 	}
 
 	& > h1:first-of-type {
@@ -68,6 +68,13 @@ body.post {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		min-height: 4em;
+		position: relative;
+		overflow: hidden;
+	}
+
+	footer {
+		position: relative;
 	}
 }
 

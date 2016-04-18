@@ -110,13 +110,10 @@ window.aSlidesSlideData = {
 		setup() {
 		},
 		action: function *() {
-			this.dataset.timeout = setTimeout(() => this.parentNode.parentNode.fire('a-slides_trigger-event'), 1000);
-			yield;
 			this.$('video').play();
 			yield;
 		},
 		teardown() {
-			clearTimeout(this.dataset.timeout);
 			this.$('video').pause();
 			this.$('video').currentTime = 0;
 		}

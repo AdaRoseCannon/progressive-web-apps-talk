@@ -4,14 +4,12 @@
 ---
 
 .a-slides_slide {
+	background-color: lavenderblush;
+	border: 1px solid grey;
+	overflow: visible;
 
 	#splash-slide {
 		display: block;
-	}
-
-	.a-slides_notes {
-		background-color: lavenderblush;
-		border: 1px solid grey;
 	}
 
 	.a-slides_slide-content {
@@ -24,6 +22,7 @@
 		justify-content: flex-start;
 		align-content: flex-start;
 		flex-direction: column;
+		transform: scale(0.4) translate(1em, 5em);
 
 		& > p {
 			min-width: 20%;
@@ -57,6 +56,7 @@
 }
 
 footer {
+	z-index: -1;
 	position: absolute;
 	bottom: 0;
 	left: 0;

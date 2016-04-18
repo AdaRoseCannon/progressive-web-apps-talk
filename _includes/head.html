@@ -8,7 +8,12 @@
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400,300,600,800' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Lato:900' rel='stylesheet' type='text/css'>
 	<title>{{ page.title }}</title>
+	{% if page.image %}
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:image" content="{{ page.image }}">
+	{% else %}
 	<meta name="twitter:card" content="summary">
+	{% endif %}
 	<meta name="twitter:site" content="@{{ site.author.twitter }}">
 	<meta name="twitter:creator" content="@{{ site.author.twitter }}">
 	{% if page.title %}
