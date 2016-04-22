@@ -10,7 +10,7 @@
       "density": 4.0
     }
   ],
-  "start_url": "/?standalone",
+  "start_url": "/progressive-web-apps-talk/?standalone",
   "display": "standalone",
   "orientation": "landscape",
   "background_color": "{{ site.color }}",
