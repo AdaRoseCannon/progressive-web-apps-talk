@@ -1,0 +1,16 @@
+{
+  "name": "PWA Talk",
+  "icons": [
+    {
+      "src": "launcher-icon-4x.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "density": 4.0
+    }
+  ],
+  "start_url": "/?standalone",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "lavenderblush",
+  "theme_color": "lavenderblush"
+}
