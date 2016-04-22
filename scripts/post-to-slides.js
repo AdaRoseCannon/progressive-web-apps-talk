@@ -1,5 +1,5 @@
 'use strict';
-/* global $, ASlides*/
+/* global $, ASlides, twemoji*/
 
 /**
  * Turns a normal mrkdown blog posti into a slide deck!!
@@ -30,7 +30,10 @@ function addScript (url) {
 	return promiseScript;
 }
 
-addScript('https://twemoji.maxcdn.com/2/twemoji.min.js')().then(() => twemoji.parse(document.body));
+addScript('https://twemoji.maxcdn.com/2/twemoji.min.js')().then(() => twemoji.parse(document.body, {
+	folder: 'svg',
+	ext: '.svg'
+}));
 
 function init() {
 	return Promise.all([

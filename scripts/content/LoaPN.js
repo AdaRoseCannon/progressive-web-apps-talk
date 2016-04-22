@@ -25,7 +25,10 @@ window.aSlidesSlideData = {
 				'👉',
 				'🔔',
 				'<span style="font-size: 1.5em;">e</span> 🍏',
-			].map(str => window.twemoji ? window.twemoji.parse(str) : str );
+			].map(str => window.twemoji ? window.twemoji.parse(str, {
+				folder: 'svg',
+				ext: '.svg'
+			}) : str );
 
 			const nodes = [{
 				label: 'Appiness',
