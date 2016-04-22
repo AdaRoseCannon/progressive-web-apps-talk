@@ -423,7 +423,11 @@ Here it is as a cURL request.
 
 # Code fetch
 
-It makese more sense when broken down into a fetch request.
+It makes more sense when broken down into a fetch request.
+
+1. We create the header with the API key and ocntent type.
+1. We make a post request with the id in the body
+1. The ID is the long string at the end of the url.
 
 > Isomorphic fetch in a node.js server
 >
