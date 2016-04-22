@@ -6,6 +6,7 @@
 aslide: https://rawgit.com/AdaRoseEdwards/a-slides/master/build
 name: Progressive Web Apps
 description: Life of a push notification
+color: lavenderblush
 author:
   name: Ada Rose Edwards
   email: ada@ada.is
