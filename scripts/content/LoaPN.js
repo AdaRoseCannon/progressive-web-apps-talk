@@ -25,7 +25,8 @@ window.aSlidesSlideData = {
 				'👉',
 				'🔔',
 				'<span style="font-size: 1.5em;">e</span> 🍏',
-			];
+			].map(str => window.twemoji ? window.twemoji.parse(str) : str );
+
 			const nodes = [{
 				label: 'Appiness',
 				fixed: true,

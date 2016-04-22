@@ -30,6 +30,8 @@ function addScript (url) {
 	return promiseScript;
 }
 
+addScript('https://twemoji.maxcdn.com/2/twemoji.min.js')().then(() => twemoji.parse(document.body));
+
 function init() {
 	return Promise.all([
 		addScript('https://cdn.rawgit.com/AdaRoseEdwards/dirty-dom/v1.3.1/build/dirty-dom-lib.min.js').promise,
