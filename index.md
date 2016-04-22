@@ -65,15 +65,16 @@ A progressive web app is a type of website which exhibits certain *app-like* pro
 * **✈** - **Offline first** - The app must be capable of starting offline and still display useful information. With no No ‘browser-like’ elements or page loading behaviour
 * **<span class="home-screen-icon">🐵</span>** - **An icon on the homescreen** - some browsers will prompt for this if it fulfills certain conditions others will not.
 * **📱💻** - **Responsive** - Perfectly filling the screen, These sites are primarily aimed at mobile and tablets so will need to respond to the plethera of screen sizes. They should also just work as desktop websites too.
-* **http://** - **On the open web** - Not locked in to any browser or app store.
+* **https://** - **On the open web** - Not locked in to any browser or app store.
 * **👉** - **Touch capable** - An interface designed for touch with Gesture interaction
 * **🔔** - **Push Notifications** - The ability to receive notifications when the app is not running. Not applicable for everyone but is very app-like
+* **e 🍏** - **Progressive** - It needs to still work on platforms which may not support installing or service workers yet.
 
 http://labs.ft.com/2012/06/what-exactly-is-an-app/
 
 * Were going to explore creating push notifications.
 
-<blockquote class="a-slides_slide-content" style="height: 661px;"><svg width="664" height="661"><line class="link" x1="332" y1="330.5" x2="223.8337647934483" y2="547.401729650129"></line><line class="link" x1="332" y1="330.5" x2="89.82259729248248" y2="337.9236958559692"></line><line class="link" x1="332" y1="330.5" x2="220.5842330024958" y2="115.20644250647905"></line><line class="link" x1="332" y1="330.5" x2="458.61188788935624" y2="123.87114400350883"></line><line class="link" x1="332" y1="330.5" x2="574.1752919863397" y2="336.29477222460616"></line><line class="link" x1="332" y1="330.5" x2="468.5708742502956" y2="530.7741121038185"></line></svg><span class="node" style="transform: translate(332px, 330.5px) translate(-50%, -50%);">Appiness</span><span class="node" style="transform: translate(223.834px, 547.402px) translate(-50%, -50%);">✈</span><span class="node" style="transform: translate(89.8226px, 337.924px) translate(-50%, -50%);"><span class="home-screen-icon">🐵</span></span><span class="node" style="transform: translate(220.584px, 115.206px) translate(-50%, -50%);">📱💻</span><span class="node" style="transform: translate(458.612px, 123.871px) translate(-50%, -50%);">http://</span><span class="node" style="transform: translate(574.175px, 336.295px) translate(-50%, -50%);">👉</span><span class="node" style="transform: translate(468.571px, 530.774px) translate(-50%, -50%);">🔔</span></blockquote>
+<blockquote class="a-slides_slide-content" style="height: 661px;"><svg width="887" height="661"><line class="link" x1="443.5" y1="330.5" x2="403.9572407972903" y2="570.5806086451331"></line><line class="link" x1="443.5" y1="330.5" x2="228.15818899594174" y2="444.108749139755"></line><line class="link" x1="443.5" y1="330.5" x2="224.11106509107583" y2="224.95466908867178"></line><line class="link" x1="443.5" y1="330.5" x2="399.91996363779634" y2="90.84298002504529"></line><line class="link" x1="443.5" y1="330.5" x2="605.3781005532702" y2="148.60175172671623"></line><line class="link" x1="443.5" y1="330.5" x2="686.5415655555497" y2="344.7672486096294"></line><line class="link" x1="443.5" y1="330.5" x2="596.8422417555993" y2="519.2969713950393"></line></svg><span class="node" style="transform: translate(443.5px, 330.5px) translate(-50%, -50%);">Appiness</span><span class="node" style="transform: translate(403.957px, 570.581px) translate(-50%, -50%);">✈</span><span class="node" style="transform: translate(228.158px, 444.109px) translate(-50%, -50%);"><span class="home-screen-icon">🐵</span></span><span class="node" style="transform: translate(224.111px, 224.955px) translate(-50%, -50%);">📱💻</span><span class="node" style="transform: translate(399.92px, 90.843px) translate(-50%, -50%);">http://</span><span class="node" style="transform: translate(605.378px, 148.602px) translate(-50%, -50%);">👉</span><span class="node" style="transform: translate(686.542px, 344.767px) translate(-50%, -50%);">🔔</span><span class="node" style="transform: translate(596.842px, 519.297px) translate(-50%, -50%);"><span style="font-size: 1.5em;">e</span> 🍏</span></blockquote>
 
 ## Prerequisites for a push notification
 
@@ -485,8 +486,11 @@ Then I can show it to you working.
 1. then we sent a push message
 1. The page can trigger an update when it gets it.
 1. Listen to this message with `navigator.serviceWorker.addEventListener('message', function)`
-1. Handle click
-1. blah, need to finish
+
+1. The final part is what to do when the user interacts with the click
+1. Here we close the notification (you don't have to)
+1. try to focus an existing window
+1. or open a new one
 
 > In the service worker:
 >
@@ -563,14 +567,15 @@ Then I can show it to you working.
 
 # Summary of what we covered
 
-> 1. This
-> 1. That
-> 1. Something else
+> 1. The Web now supports making Apps. (It's fun)
+> 1. Making a WebApp requires https.
+> 1. A web app manifest describes your app.
+> 1. A service worker or falling back to AppCache can make it work offline.
+> 1. A service worker allows you to send push notifications.
 
 ## Thanks
 
 Thank you for listening I hope you have a successful app
-
 
 <blockquote class="dark" style="background-image: url('images/FinancialTimes_G-FTUS_Balloon_LordMayorsAppeal.jpg'); background-color: rgba(107, 107, 123, 0.8) !important;">
 <h1>Thank you for listening</h1>

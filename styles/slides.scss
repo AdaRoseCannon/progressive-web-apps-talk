@@ -39,7 +39,7 @@
 			width: 100%;
 		}
 
-		& img,
+		& img:not(.emoji),
 		& video {
 			width: 0;
 			object-fit: contain;

@@ -9,6 +9,7 @@ window.aSlidesSlideData = {
 			const w = this.clientWidth;
 			const h = this.clientHeight;
 			const d = 0.4 * Math.min(w,h);
+			this.style.height = '';
 
 			const lines = d3.select(this).append('svg')
 				.attr('width', w)
@@ -22,7 +23,8 @@ window.aSlidesSlideData = {
 				'📱💻',
 				'http://',
 				'👉',
-				'🔔'
+				'🔔',
+				'<span style="font-size: 1.5em;">e</span> 🍏',
 			];
 			const nodes = [{
 				label: 'Appiness',

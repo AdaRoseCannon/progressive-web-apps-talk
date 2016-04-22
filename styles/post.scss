@@ -37,6 +37,13 @@ video {
 	max-height: 80vh;
 }
 
+img.emoji {
+   height: 1em;
+   width: 1em;
+   margin: 0 .05em 0 .1em;
+   vertical-align: -0.1em;
+}
+
 body.post {
 	& > h2, & > h3 {
 		margin: 2em 0 1.5em 0;
@@ -94,7 +101,7 @@ pre {
 	tab-size: 2;
 }
 
-img {
+img:not(.emoji) {
 	border: 1px solid #ccc;
 	margin: 0.5em;
 	box-shadow: 0 0 0.5em rgba(0,0,0,0.2);
@@ -123,6 +130,8 @@ footer {
     background: linear-gradient(to bottom, #dca5f7 0%,#b185c6 100%);
     box-shadow: 0.1em 0.1em 0 0 #795988;
     justify-content: center;
+	align-items: center;
+	align-content: center;
     line-height: 1.6em;
 	color: #F7EF75;
 	font-weight: normal;
