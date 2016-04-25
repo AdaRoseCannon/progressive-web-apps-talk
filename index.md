@@ -89,7 +89,13 @@ http://labs.ft.com/2012/06/what-exactly-is-an-app/
 
 > ## https://81.ada.is
 >
-> <p><video src="images/simple-demo.mp4" autoplay="false" preload="true" controls="true"></video></p>
+> <p style="flex-shrink:1;"><video src="images/simple-demo.mp4" autoplay="false" preload="true" controls="true"></video></p>
+
+# Topics I am going to cover
+
+* Web App Manifest
+* Running a Service Worker
+* Sending and Receiving Push Notifications
 
 ## Prerequisites for a push notification
 
@@ -585,7 +591,7 @@ Then I can show it to you working.
 
 Notice the notification arrives when the phone is off and the app is closed.
 
-> <p><video src="images/demo.mp4" autoplay="false" preload="true" controls="true"></video></p>
+> <p style="flex-shrink:1;"><video src="images/demo.mp4" autoplay="false" preload="true" controls="true"></video></p>
 
 # Summary of what we covered
 
