@@ -20,8 +20,6 @@ I'm Ada Edwards from the Financial Times, I'm here to talk about Progressive Web
 
 ## **Note to self:** Speak slowly no one can understand your accent.
 
-Firstly a heads up this will be pretty code heavy but the notes are online so you can follow along or read later.
-
 I'd like to ask some questions before I start.
 
 * Who here is a primarily a native app developer?
@@ -35,6 +33,13 @@ I'd like to ask some questions before I start.
 <h3>{{ site.description }}</h3>
 <h2>Ada Rose Edwards - Financial Times</h2>
 </blockquote>
+
+# Follow along at home
+
+Firstly a heads up this will be pretty code heavy but the notes are online so you can follow along or read later.
+
+> <h1>Notes and slides:</h1>
+> <h2><script>document.write('https://' + document.location.hostname + document.location.pathname)</script></h2>
 
 ## Push Notifications
 
@@ -76,6 +81,16 @@ http://labs.ft.com/2012/06/what-exactly-is-an-app/
 
 <blockquote class="a-slides_slide-content" style="height: 661px;"><svg width="887" height="661"><line class="link" x1="443.5" y1="330.5" x2="403.9572407972903" y2="570.5806086451331"></line><line class="link" x1="443.5" y1="330.5" x2="228.15818899594174" y2="444.108749139755"></line><line class="link" x1="443.5" y1="330.5" x2="224.11106509107583" y2="224.95466908867178"></line><line class="link" x1="443.5" y1="330.5" x2="399.91996363779634" y2="90.84298002504529"></line><line class="link" x1="443.5" y1="330.5" x2="605.3781005532702" y2="148.60175172671623"></line><line class="link" x1="443.5" y1="330.5" x2="686.5415655555497" y2="344.7672486096294"></line><line class="link" x1="443.5" y1="330.5" x2="596.8422417555993" y2="519.2969713950393"></line></svg><span class="node" style="transform: translate(443.5px, 330.5px) translate(-50%, -50%);">Appiness</span><span class="node" style="transform: translate(403.957px, 570.581px) translate(-50%, -50%);">✈</span><span class="node" style="transform: translate(228.158px, 444.109px) translate(-50%, -50%);"><span class="home-screen-icon">🐵</span></span><span class="node" style="transform: translate(224.111px, 224.955px) translate(-50%, -50%);">📱💻</span><span class="node" style="transform: translate(399.92px, 90.843px) translate(-50%, -50%);">http://</span><span class="node" style="transform: translate(605.378px, 148.602px) translate(-50%, -50%);">👉</span><span class="node" style="transform: translate(686.542px, 344.767px) translate(-50%, -50%);">🔔</span><span class="node" style="transform: translate(596.842px, 519.297px) translate(-50%, -50%);"><span style="font-size: 1.5em;">e</span> 🍏</span></blockquote>
 
+## Web App Demo
+
+* To explore what is the current state of push notifications I wrote a small demo app.
+* Unfortunately this WebApp is not progressive as I have not made it fall back to older technology on devices which don't yet support a
+* a service worker such as iOS devices.
+
+> ## https://81.ada.is
+>
+> <p><video src="images/simple-demo.mp4" autoplay="false" preload="true" controls="true"></video></p>
+
 ## Prerequisites for a push notification
 
 * Specifically we are looking at producing a web app for the **Chromium 44 based** Samsung browser.
@@ -93,7 +108,7 @@ The Web App Manifest defines various properties of a Web App, e.g.
 
 * the name on the home screen
 * how the app should orientate itself
-*  whether to hide the browser chrome i.e. whether it looks like a native app, rather than a web page when launched from the home screen.
+* whether to hide the browser chrome i.e. whether it looks like a native app, rather than a web page when launched from the home screen.
 
 The top part of the manifest down to the line break is standard.
 
@@ -379,6 +394,8 @@ The subscription details provide an endpoint which the server side can query to 
 
 We'll fire this up to the server to use later.
 
+https://developer.mozilla.org/en-US/docs/Web/API/PushSubscription
+
 > ```json
 > {
 >  "endpoint": "http://example.com/some/uuid"
@@ -391,8 +408,7 @@ We'll fire this up to the server to use later.
 > cz6YgbRXHAc:APA91bGWtm35_kAQsZEn_Ye…EVXj1
 > MDXGulbtBWJYw4AGcIWXq7p5BjhFhnDhMQoqOHRzY
 > 9jI_OeOn_DQ5W_cYD5tCDDdjOD7d"</span>
->
-> https://developer.mozilla.org/en-US/docs/Web/API/PushSubscription
+
 
 # Sending a push notification
 
@@ -513,7 +529,7 @@ Then I can show it to you working.
 > 	);
 > });
 >
-> // Function for retreiving latest message,
+> // Function for retrieving latest message,
 > // returns a promise.
 > function getMessage() {
 > 	return fetchLatestMessageFromAPI()
@@ -565,7 +581,9 @@ Then I can show it to you working.
 > });
 > ```
 
-# Demo
+# Push Demo
+
+Notice the notification arrives when the phone is off and the app is closed.
 
 > <p><video src="images/demo.mp4" autoplay="false" preload="true" controls="true"></video></p>
 

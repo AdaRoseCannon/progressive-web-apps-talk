@@ -1,5 +1,5 @@
 'use strict';
-/* global $, ASlides, twemoji*/
+/* global $, $$, ASlides, twemoji*/
 
 /**
  * Turns a normal mrkdown blog posti into a slide deck!!
@@ -42,6 +42,7 @@ function init() {
 	])
 	.then(function () {
 
+		const noSlides = $$('body > blockquote').length;
 		const slideContainer = document.createElement('div').setClassName('a-slides_slide-container');
 		let slide;
 		let i=0;
@@ -51,6 +52,8 @@ function init() {
 			const notes = slide.prevAll();
 			const newSlide = document.createElement('div').setClassName('a-slides_slide');
 			const notesWrapper = document.createElement('div').setClassName('a-slides_notes');
+			const progressBar = document.createElement('div').setClassName('a-slides_progress');
+			progressBar.style.width = `${100*i/noSlides}%`;
 			slide.classList.add('a-slides_slide-content');
 			if (notes[0] && notes[0].tagName.match(/h[0-6]/i)) {
 				name = notes[0].textContent.trim().replace(/[^A-Za-z0-9]/ig, '-').toLowerCase();
@@ -61,6 +64,7 @@ function init() {
 			newSlide.appendChild(notesWrapper);
 			notes.forEach(note => notesWrapper.appendChild(note));
 			slideContainer.appendChild(newSlide);
+			newSlide.appendChild(progressBar);
 		}
 		document.body.prependChild(slideContainer);
 
@@ -93,6 +97,12 @@ function init() {
 			slideContainer.classList.add('hide-presentation');
 		}
 
+		let finishAt = Date.now() + 900*1000;
+		const clock = document.createElement('div');
+		slideContainer.appendChild(clock).setClassName('a-slides_clock');
+		setInterval(() => clock.textContent = (new Date(Math.max(finishAt - Date.now(),0)))
+			.toLocaleTimeString(undefined, {timeZone: 'UTC'}).match(/^\d\d:(\d\d:\d\d)/)[1], 200);
+		clock.on('click', () => finishAt = Date.now() + 900*1000);
 		return slideContainer;
 	});
 }

@@ -1,6 +1,20 @@
 'use strict';
 /* global d3 */
 
+const playVideo = {
+	setup() {
+	},
+	action: function *() {
+		this.$('video').currentTime = 0;
+		this.$('video').play();
+		yield;
+	},
+	teardown() {
+		this.$('video').pause();
+		this.$('video').currentTime = 0;
+	}
+};
+
 window.aSlidesSlideData = {
 	'slide-what-is-a-progressive-web-app-': {
 		setup() {},
@@ -112,18 +126,8 @@ window.aSlidesSlideData = {
 	'slide-finally-subscribing': scrollCodeBlock(/^(then|catch)$/, 2),
 	'slide-code-fetch': scrollCodeBlock(/^\/\//, 1),
 	'slide-receiving-push-notifications-service-worker--code--': scrollCodeBlock(/^\/\//, 1),
-	'slide-demo': {
-		setup() {
-		},
-		action: function *() {
-			this.$('video').play();
-			yield;
-		},
-		teardown() {
-			this.$('video').pause();
-			this.$('video').currentTime = 0;
-		}
-	}
+	'slide-web-app-demo': playVideo,
+	'slide-push-demo': playVideo
 };
 
 function scrollCodeBlock(divider, lookahead) {
