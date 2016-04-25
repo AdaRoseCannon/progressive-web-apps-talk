@@ -93,9 +93,9 @@ http://labs.ft.com/2012/06/what-exactly-is-an-app/
 
 # Topics I am going to cover
 
-* Web App Manifest
-* Running a Service Worker
-* Sending and Receiving Push Notifications
+> * Web App Manifest
+> * Running a Service Worker
+> * Sending and Receiving Push Notifications
 
 ## Prerequisites for a push notification
 
