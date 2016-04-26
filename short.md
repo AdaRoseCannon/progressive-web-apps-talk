@@ -13,6 +13,7 @@ script1: scripts/content/LoaPN.js
 
 Talk plan for SDC
 Length 15-15mins, with demo.
+This is the short version [Click here for the uncut version](index.html)
 
 ## Introduction
 
@@ -36,7 +37,9 @@ I'd like to ask some questions before I start.
 
 # Follow along at home
 
-Firstly a heads up this will be pretty code heavy but the notes are online so you can follow along or read later.
+There are a lot of code heavy slides.
+
+I don't have time to step through them in detail but you can read along at home.
 
 > <h1>Notes and slides:</h1>
 > <h2><script>document.write('https://' + document.location.hostname + document.location.pathname)</script></h2>
@@ -59,6 +62,26 @@ Since that time features have gained support across platforms and new technologi
 
 >![First Version of the FT Web App](images/ipad-home.jpg)
 
+## Web App Demo
+
+* To explore what is the current state of web apps I wrote a little one.
+* The idea of the app is to touch on all the features available in a web app
+* The purpose of this app is to share emoji and small photos
+
+> ## https://81.ada.is
+>
+> <p style="flex-shrink:1;"><video src="images/simple-demo.mp4" autoplay="false" preload="true" controls="true"></video></p>
+
+## Installing a Web App
+
+The most important difference between a web app and a regular app is that
+
+A web app is not installed via an app store
+
+it is installed straight from the browser.
+
+> <p style="flex-shrink:1;"><video src="images/save-to-homescreen.mp4" autoplay="false" preload="true" controls="true"></video></p>
+
 ## What is a progressive web app?
 
 ## **Note to self**: Remember to **read the descriptions** don't just rush through!
@@ -67,43 +90,35 @@ A progressive web app is a type of website which exhibits certain *app-like* pro
 
 (Mind map slide)
 
-* **✈** - **Offline first** - The app must be capable of starting offline and still display useful information. With no No ‘browser-like’ elements or page loading behaviour
+* **✈** - **Offline first** - The app must be capable of starting offline and still display useful information.
 * **<span class="home-screen-icon">🐵</span>** - **An icon on the homescreen** - some browsers will prompt for this if it fulfills certain conditions others will not.
 * **📱💻** - **Responsive** - Perfectly filling the screen, These sites are primarily aimed at mobile and tablets so will need to respond to the plethera of screen sizes. They should also just work as desktop websites too.
 * **https://** - **On the open web** - Not locked in to any browser or app store.
 * **👉** - **Touch capable** - An interface designed for touch with Gesture interaction
 * **🔔** - **Push Notifications** - The ability to receive notifications when the app is not running. Not applicable for everyone but is very app-like
-* **e 🍏** - **Progressive** - It needs to still work on platforms which may not support installing or service workers yet.
+* **e 🍏** - **Progressive** - It's ability to be installed is a **progressive enhancement** It needs to still work as a normal website too, especially on platforms which may not support installing or service workers yet.
 
 http://labs.ft.com/2012/06/what-exactly-is-an-app/
 
-* Were going to explore creating push notifications.
+*In this talk I intend to cover in detail creating push notifications.
 
 <blockquote class="a-slides_slide-content" style="height: 661px;"><svg width="887" height="661"><line class="link" x1="443.5" y1="330.5" x2="403.9572407972903" y2="570.5806086451331"></line><line class="link" x1="443.5" y1="330.5" x2="228.15818899594174" y2="444.108749139755"></line><line class="link" x1="443.5" y1="330.5" x2="224.11106509107583" y2="224.95466908867178"></line><line class="link" x1="443.5" y1="330.5" x2="399.91996363779634" y2="90.84298002504529"></line><line class="link" x1="443.5" y1="330.5" x2="605.3781005532702" y2="148.60175172671623"></line><line class="link" x1="443.5" y1="330.5" x2="686.5415655555497" y2="344.7672486096294"></line><line class="link" x1="443.5" y1="330.5" x2="596.8422417555993" y2="519.2969713950393"></line></svg><span class="node" style="transform: translate(443.5px, 330.5px) translate(-50%, -50%);">Appiness</span><span class="node" style="transform: translate(403.957px, 570.581px) translate(-50%, -50%);">✈</span><span class="node" style="transform: translate(228.158px, 444.109px) translate(-50%, -50%);"><span class="home-screen-icon">🐵</span></span><span class="node" style="transform: translate(224.111px, 224.955px) translate(-50%, -50%);">📱💻</span><span class="node" style="transform: translate(399.92px, 90.843px) translate(-50%, -50%);">http://</span><span class="node" style="transform: translate(605.378px, 148.602px) translate(-50%, -50%);">👉</span><span class="node" style="transform: translate(686.542px, 344.767px) translate(-50%, -50%);">🔔</span><span class="node" style="transform: translate(596.842px, 519.297px) translate(-50%, -50%);"><span style="font-size: 1.5em;">e</span> 🍏</span></blockquote>
 
-## Web App Demo
-
-* To explore what is the current state of push notifications I wrote a small demo app.
-* Unfortunately this WebApp is not progressive as I have not made it fall back to older technology on devices which don't yet support a
-* a service worker such as iOS devices.
-
-> ## https://81.ada.is
->
-> <p style="flex-shrink:1;"><video src="images/simple-demo.mp4" autoplay="false" preload="true" controls="true"></video></p>
-
 # Topics I am going to cover
+
+But before we can run we need to walk so there is lots to cover.
 
 > * Web App Manifest
 > * Running a Service Worker
 > * Sending and Receiving Push Notifications
 
-## Prerequisites for a push notification
+## The Web App Manifest
 
 * Specifically we are looking at producing a web app for the **Chromium 44 based** Samsung browser.
 * Chrome requires a non standard parameter in the Web App manifest before you can even ask for notifications so we will start there.
 
 <blockquote class="dark" id="splash-slide" style="background-image: url('images/nest.jpg');">
-<h1>Prerequisites for a push notification</h1>
+<h1>The Web App Manifest</h1>
 </blockquote>
 
 ## Web App Manifest
@@ -162,47 +177,6 @@ So we need to set this up before we can begin.
 > ## https://console.developers.google.com
 > ![Google Cloud Messaging, in the dashboard](images/gcm-dashboard.png)
 
-## Finding your ID
-
-Finding your ID is difficult, it takes me a while to find and I've done it few times before so this is where you find it:
-
-Insert your project ID minus the hash as your `gcm_sender_id`
-
-> ## Finding your Id
->
-> Select 'Google Cloud Platform'
->
-> ![Finding Your Id](images/finding_gcm_sender_id.png)
-> ![Finding Your Id](images/finding_gcm_sender_id2.png)
-
-## Update the JSON
-
-Insert it into your manifest under `gcm_sender_id`:
-
-This is the same slide as earlier.
-
-> client/manifest.json:
->
-> ```json
-{
-  "name": "81 Emoji",
-  "icons": [
-    {
-      "src": "launcher-icon-4x.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "density": 4.0
-    }
-  ],
-  "start_url": "/?standalone",
-  "display": "standalone",
-   "orientation": "portrait",
->
-   "gcm_sender_id": "90157766285",
-  "background_color": "lavenderblush",
-  "theme_color": "lavenderblush"
-}
-> ```
 
 ## Setting up a Service Worker
 
@@ -605,8 +579,10 @@ Notice the notification arrives when the phone is off and the app is closed.
 
 Thank you for listening I hope you have a successful app
 
-<blockquote class="dark" style="background-image: url('images/FinancialTimes_G-FTUS_Balloon_LordMayorsAppeal.jpg'); background-color: rgba(107, 107, 123, 0.8) !important;">
-<h1>Thank you for listening</h1>
+<blockquote class="dark" style="flex-direction: column;display: flex;background-image: url('images/FinancialTimes_G-FTUS_Balloon_LordMayorsAppeal.jpg'); background-color: rgba(107, 107, 123, 0.8) !important;">
+<h1 style="flex-grow: 1;">Thank you for listening</h1>
+<h2>M. Night Shyamalan twist ending!!</h2>
+<h2>These slides were a progressive web app all along!!</h2>
 </blockquote>
 
 > # Good Reading

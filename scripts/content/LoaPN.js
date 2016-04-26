@@ -127,7 +127,8 @@ window.aSlidesSlideData = {
 	'slide-code-fetch': scrollCodeBlock(/^\/\//, 1),
 	'slide-receiving-push-notifications-service-worker--code--': scrollCodeBlock(/^\/\//, 1),
 	'slide-web-app-demo': playVideo,
-	'slide-push-demo': playVideo
+	'slide-push-demo': playVideo,
+	'slide-installing-a-web-app': playVideo
 };
 
 function scrollCodeBlock(divider, lookahead) {

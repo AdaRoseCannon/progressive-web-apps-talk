@@ -49,6 +49,10 @@
 		align-content: flex-start;
 		flex-direction: column;
 		transform: scale(0.4) translate(1em, 5em);
+		z-index: 6;
+		.presentation & {
+			z-index: 4;
+		}
 
 		& > p {
 			min-width: 20%;
