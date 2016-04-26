@@ -40,10 +40,11 @@
 
 	$nextSlideToShow: 100%;
 	$nextSlideScale: 0.5;
-	:not(.presentation) & {
+	.a-slides_slide-container:not(.presentation) & {
 		transition: transform 128ms ease;
 
 		&.active .a-slides_slide-content {
+			transform: translate(0.4em, 1.25em) scale(0.4) translateX(-$nextSlideToShow * $nextSlideScale);
 			transition: none;
 		}
 		&.active + .a-slides_slide {
@@ -57,7 +58,7 @@
 	}
 
 	.a-slides_slide-content {
-		transform: translate(0.4em, 1.25em) scale(0.4) translateX(-$nextSlideToShow * $nextSlideScale);
+		transform: translate(0.4em, 1.25em) scale(0.4);
 		background-color: white;
 		display: flex;
 		font-size: 1.8em;

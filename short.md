@@ -13,7 +13,7 @@ script1: scripts/content/LoaPN.js
 
 Talk plan for SDC
 Length 15-15mins, with demo.
-This is the short version [Click here for the uncut version](index.html)
+This is the short version
 
 ## Introduction
 
