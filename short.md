@@ -52,21 +52,13 @@ Moving to a Web App enabled the same app to ship across platforms using a single
 
 It also allowed us to bypass app stores.
 
-That said it did come with its' own difficulties:
-
-We had to use the infamous appcache to enable offline support.
-
-Difficulties arose when different platforms supported different API features. These differences need a polyfill or the feature should be avoided entirely.
-
-Since that time features have gained support across platforms and new technologies which are useful for Web Apps such as service workers have emerged.
-
 >![First Version of the FT Web App](images/ipad-home.jpg)
 
 ## Web App Demo
 
 * To explore what is the current state of web apps I wrote a little one.
-* The idea of the app is to touch on all the features available in a web app
-* The purpose of this app is to share emoji and small photos
+* The idea of the app is to **touch on all the features** available in a **web app**
+* The purpose of this app is to share **emoji and small photos**
 
 > ## https://81.ada.is
 >
@@ -78,7 +70,7 @@ The most important difference between a web app and a regular app is that
 
 A web app is not installed via an app store
 
-it is installed straight from the browser.
+You install a web app **straight from the browser**.
 
 > <p style="flex-shrink:1;"><video src="images/save-to-homescreen.mp4" autoplay="false" preload="true" controls="true"></video></p>
 
@@ -108,14 +100,15 @@ http://labs.ft.com/2012/06/what-exactly-is-an-app/
 
 But before we can run we need to walk so there is lots to cover.
 
-> * Web App Manifest
-> * Running a Service Worker
+> * **Describing** your web app with the **Web App Manifest**
+> * **Offline support** with a **Service Worker**
 > * Sending and Receiving Push Notifications
 
 ## The Web App Manifest
 
 * Specifically we are looking at producing a web app for the **Chromium 44 based** Samsung browser.
-* Chrome requires a non standard parameter in the Web App manifest before you can even ask for notifications so we will start there.
+
+* The Web App Manifest defines various properties of a Web App, e.g.
 
 <blockquote class="dark" id="splash-slide" style="background-image: url('images/nest.jpg');">
 <h1>The Web App Manifest</h1>
@@ -125,15 +118,12 @@ But before we can run we need to walk so there is lots to cover.
 
 This is an example Web App manifest for a demo I built for this talk.
 
-The Web App Manifest defines various properties of a Web App, e.g.
-
-* the name on the home screen
-* how the app should orientate itself
+* the **name** on the home screen
+* the **icon** on the home screen
+* whether it should be shown in landscape or portrait
 * whether to hide the browser chrome i.e. whether it looks like a native app, rather than a web page when launched from the home screen.
 
 The top part of the manifest down to the line break is standard.
-
-It defines an icon, and the URL the app should use to start, in this case I add a ?standalone suffix for detecting installs with Analytics.
 
 But the last three properties are Chrome specific, the one pertinent to push notifications is `gcm_sender_id` without this the app won't even try prompting for push notifications.
 
@@ -180,15 +170,15 @@ So we need to set this up before we can begin.
 
 ## Setting up a Service Worker
 
-Your app receives push notifications via a Service Worker.
-
-A worker is a piece of JavaScript which runs in a seperate thread to your main page.
+A worker is a piece of JavaScript which runs in a separate thread to your main page.
 
 The service worker is a special shared worker.
 
 It acts like a proxy between browser tabs and the larger web allowing one to rewrite requests and responses on the fly.
 
-If often gets compared to AppCache but being a worker it can be used much more usefully.
+If often gets compared to AppCache but that is doing it a disservice.
+
+It is a programmable proxy, right there in your borwser.
 
 The service worker (and by extension push notifications) are unavailble on iOS but you can progressively enhance offline support by using AppCache.
 
@@ -196,6 +186,7 @@ The service worker will displace AppCache when it is installed.
 
 <blockquote class="dark" id="splash-slide" style="background-image: url('images/bird5.jpg');">
 <h1>Setting up the Service Worker</h1>
+<h2>Offlining, and so much more!</h2>
 </blockquote>
 
 ## The Service
@@ -275,6 +266,7 @@ The browser then shows it's own "request permission" box to the user.
 > Then
 > ![Ask In Chrome](images/ask2.png)
 
+<!---
 ## Detecting push notification status
 
 Stepping through the code:
@@ -305,8 +297,9 @@ In the first run case where we have not subscribed we present a banner which upo
 >		console.log('Push notifications not supported.')
 >	});
 > ```
+--->
 
-## Finally Subscribing
+## Subscribing
 
 Subscribing is more complex but it's not that ugly.
 
@@ -326,11 +319,7 @@ Subscribing is more complex but it's not that ugly.
 
 4. Finally remove the spinner from the banner
 
-> client/scripts/lib/push-notifications.js
->
 > ```javascript
-> // Make the banner semi transparent so it is clear something is happening
-> pushBanner.classList.add('working');
 >
 > // get the serverWorkerRegistration object from the earlier instantiation promise
 > swPromise
@@ -351,20 +340,14 @@ Subscribing is more complex but it's not that ugly.
 > })
 > .catch(function(e) {
 > 	if (Notification.permission === 'denied') {
-> 		notify.warn('Permission for Notifications was denied');
+>
+>		// User says no
 > 	} else {
 >
 > 		// A problem occurred with the subscription; common reasons
 > 		// include network errors, and lacking gcm_sender_id and/or
 > 		// gcm_user_visible_only in the manifest.
-> 		error('Unable to subscribe to push.');
-> 		console.log(e);
 > 	}
-> })
-> .then(() => {
->
-> 	// Remove the indication that something is happening
-> 	pushBanner.classList.remove('working');
 > });
 > ```
 
@@ -372,7 +355,7 @@ Subscribing is more complex but it's not that ugly.
 
 The subscription details provide an endpoint which the server side can query to send a push notification.
 
-We'll fire this up to the server to use later.
+Send this information to your server so it can send push notifications later.
 
 https://developer.mozilla.org/en-US/docs/Web/API/PushSubscription
 
@@ -394,7 +377,9 @@ https://developer.mozilla.org/en-US/docs/Web/API/PushSubscription
 
 Now we have an endpoint we can use to fire off notifications when ever we want.
 
-Each endpoint will provide a different address, for the case of Chrome and the Samsung browser it's google cloud messaging.
+Each endpoint will provide a different address, for the case of Chrome and the **Samsung browser** it's **google cloud messaging**.
+
+There is spec for people to host their own
 
 This is where we break out the API key we got when setting up our project for Google Cloud Messaging.
 
@@ -410,6 +395,27 @@ You have to form a post request with your API key in the header and all of the f
 
 Here it is as a cURL request.
 
+> POST request at https://android.googleapis.com/gcm/send
+>
+> Headers:
+>
+> ```text
+ 	Content-Type: "application/json",
+ 	Authorization: "key=AIzaSyAc228MeZHA5NfhPANea01wnyeQD7uVY0c" (not a real API key)
+>```
+>
+> Body:
+>
+> ```json
+{
+  "registration_ids": [
+    "APA91bE9DAy6_p9bZ9I58rixOv-ya6PsNMi9Nh5VfV4lpXGw1wS6kxrkQbowwBu17ryjGO0ExDlp-S-mCiwKc5HmVNbyVfylhgwITXBYsmSszpK0LpCxr9Cc3RgxqZD7614SqDokwsc3vIEXkaT8OPIM-mnGMRYG1-hsarEU4coJWNjdFP16gWs"
+  ]
+}
+> ```
+
+# As a curl
+
 > cURL
 >
 > ```bash
@@ -417,6 +423,7 @@ Here it is as a cURL request.
 >```
 > (not a real API key)
 
+<!---
 # Code fetch
 
 It makes more sense when broken down into a fetch request.
@@ -452,16 +459,13 @@ It makes more sense when broken down into a fetch request.
 > 	})
 > });
 >```
+--->
 
 # Receiving push notifications
 
-When the client receiving the response from the Push Notification Server it does not go to the window.
+When the client receiving the response from the Push Notification Server the browser
 
-Which makes sense because there could be more (or less) than one window and all windows share the same service worker.
-
-If there are no open windows and the service worker is not running, when a push notification arrives,
-
-The browser will even fire up the service worker just to handle the notification.
+fires an event on the serviceworker, even if there are no windows open!!
 
 <blockquote class="dark" style="background-image: url('images/baby-birds.jpg');">
 <h1>Receiving Push Notifications</h1>
@@ -477,11 +481,9 @@ Then I can show it to you working.
 
 1. This takes place in the Event Listener for push events.
 1. When the phone receives a push notification for this app it fires this event on the service worker.
-1. The service worker then does two things.
-  1. Asks any open windows to check for new messages.
-  1. Displays a push notification to the user.
 1. We haven't sent any information with the notification we will get the latest message from the api.
 1. We will then format the message as a notification.
+
 1. To refresh the pages, we query for open windows.
 1. then we sent a push message
 1. The page can trigger an update when it gets it.
@@ -498,46 +500,19 @@ Then I can show it to you working.
 > // Setup Event Listener
 > self.addEventListener('push', function(event) {
 >
->	// The event is completed when we have
->	// Triggered a refresh on any open windows
-> 	// Display a notification
+> 	// The event is completed once
+>   // we have requested the lates post from the API
+>   // used it to display the notification to the user
 > 	event.waitUntil(
->		Promise.all([
->			refreshOpenWindows(),
-> 			getMessageDetails().then(details => self.registration.showNotification(details.title, details))
->		])
+>		getMessageDetails()
+>		.then(function (details) {
+>			self.registration.showNotification(details.title, {
+>				body: details.message,
+>				icon: '/my-app-logo-192x192.png'
+>			}));
+>		})
 > 	);
 > });
->
-> // Function for retrieving latest message,
-> // returns a promise.
-> function getMessage() {
-> 	return fetchLatestMessageFromAPI()
->		.then(function (data) {
->			return {
->				title: data.user + 'said: ',
->				body: data.message,
->				icon: '/my-app-logo-192x192.png'
->			};
->		});
-> }
->
-> // Find any open windows and get them to update,
-> // In this case I have has change listeners but
-> // window.postMessage should work too.
-> //
-> // One way of triggering UI updates without using
-> // sockets or polling
-> function refreshOpenWindows() {
-> 	return clients.matchAll({
-> 		type: 'window'
-> 	})
-> 	.then(function (windows) {
-> 		windows.forEach(function (w) {
-> 			w.postMessage({action: 'refresh'});
-> 		});
-> 	});
-> }
 >
 > // We can even handle how it behaves on click.
 > self.addEventListener('notificationclick', function(event) {
@@ -570,10 +545,10 @@ Notice the notification arrives when the phone is off and the app is closed.
 # Summary of what we covered
 
 > 1. The Web now supports making Apps. (It's fun)
-> 1. Making a WebApp requires https.
+> 1. Making a Web App requires https because the APIs are powerful.
 > 1. A web app manifest describes your app.
-> 1. A service worker or falling back to AppCache can make it work offline.
-> 1. A service worker allows you to send push notifications.
+> 1. A service worker or AppCache can make it work offline.
+> 1. A service worker additionally allows you to send push notifications.
 
 ## Thanks
 

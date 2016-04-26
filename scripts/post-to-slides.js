@@ -102,7 +102,10 @@ function init() {
 		slideContainer.appendChild(clock).setClassName('a-slides_clock');
 		setInterval(() => clock.textContent = (new Date(Math.max(finishAt - Date.now(),0)))
 			.toLocaleTimeString(undefined, {timeZone: 'UTC'}).match(/^\d\d:(\d\d:\d\d)/)[1], 200);
-		clock.on('click', () => finishAt = Date.now() + 900*1000);
+		clock.on('click', e => {
+			e.preventDefault();
+			finishAt = Date.now() + 900*1000;
+		});
 		return slideContainer;
 	});
 }

@@ -35,7 +35,7 @@ window.aSlidesSlideData = {
 				'✈',
 				'<span class="home-screen-icon">🐵</span>',
 				'📱💻',
-				'http://',
+				'https://',
 				'👉',
 				'🔔',
 				'<span style="font-size: 1.5em;">e</span> 🍏',
