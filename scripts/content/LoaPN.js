@@ -104,26 +104,26 @@ window.aSlidesSlideData = {
 				yield;
 			}
 
-			lines
-			.style('transform', 'translate(-50%, -50%) scale(0.01)')
-			.style('opacity', '0')
-			.style('transition', 'transform 1s ease, opacity 1 ease-in');
+			// lines
+			// .style('transform', 'translate(-50%, -50%) scale(0.01)')
+			// .style('opacity', '0')
+			// .style('transition', 'transform 1s ease, opacity 1 ease-in');
 
-			node
-			.style('background', 'transparent')
-			.style('transform', d => `translate(${d.id === '6' ? w/2+'px,'+h/2+'px' : '0,0'}) translate(-50%, -50%) scale(${d.id === '6' ? 5 : 0.001})`)
-			.style('opacity', d => d.id === '6' ? 1 : 0)
-			.style('transition', 'transform 1s ease, opacity 2s ease-in');
+			// node
+			// .style('background', 'transparent')
+			// .style('transform', d => `translate(${d.id === '6' ? w/2+'px,'+h/2+'px' : '0,0'}) translate(-50%, -50%) scale(${d.id === '6' ? 5 : 0.001})`)
+			// .style('opacity', d => d.id === '6' ? 1 : 0)
+			// .style('transition', 'transform 1s ease, opacity 2s ease-in');
 
 			force.stop();
 
-			yield;
+			// yield;
 		},
 		teardown() {
 			this.innerHTML = '';
 		}
 	},
-	'slide-finally-subscribing': scrollCodeBlock(/^(then|catch)$/, 2),
+	'slide-subscribing': scrollCodeBlock(/^(then|catch)$/, 2),
 	'slide-code-fetch': scrollCodeBlock(/^\/\//, 1),
 	'slide-receiving-push-notifications-service-worker--code--': scrollCodeBlock(/^\/\//, 1),
 	'slide-web-app-demo': playVideo,

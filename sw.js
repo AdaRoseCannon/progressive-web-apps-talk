@@ -2,10 +2,10 @@
 /* jshint browser:true */
 'use strict';
 
-
 importScripts('scripts/sw-toolbox.js');
 
 // Send a signal to all connected windows.
+// Used for service worker bridge in a-slides
 function reply(data) {
 	return self.clients.matchAll({type: 'window'})
 	.then(function (windows) {
