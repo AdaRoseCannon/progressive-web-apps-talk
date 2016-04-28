@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Push Notifications and Progressive Web Apps
-description: First draft of progressive webapp
+description: Introducing setting up progressive Web Apps with the Web App manifest, service workers & push notifications.
 image: https://ada.is/progressive-web-apps-talk/images/FinancialTimes_G-FTUS_Balloon_LordMayorsAppeal.jpg
 script: https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js
 script1: scripts/content/LoaPN.js
