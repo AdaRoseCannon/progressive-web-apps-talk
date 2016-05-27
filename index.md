@@ -142,8 +142,7 @@ So we need to set this up before we can begin.
     {
       "src": "launcher-icon-4x.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "density": 4.0
+      "type": "image/png"
     }
   ],
   "start_url": "/?standalone",
