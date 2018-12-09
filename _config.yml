@@ -3,7 +3,7 @@
 # 2. config.build.yml
 # 3. config.yml
 
-aslide: https://rawgit.com/AdaRoseEdwards/a-slides/master/build
+aslide: https://cdn.jsdelivr.net/gh/AdaRoseEdwards/a-slides@master/build
 name: Progressive Web Apps
 description: Life of a push notification
 color: lavenderblush
